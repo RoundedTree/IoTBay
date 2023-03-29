@@ -1,0 +1,79 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 29 Mar 2023, 9:38:11 am
+    Author     : Pluuskie
+*/
+body {
+	font-family: Avenir, sans-serif;
+}
+
+.title {
+	font-size: 48px;
+	font-weight: bold;
+	text-decoration: underline;
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.buttoncontainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	height: 100vh;
+}
+
+.button {
+	background-color: white;
+	color: black;
+	font-size: 18px;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	margin: 10px;
+	border-top: 3px solid white;
+	border-left: 3px solid white;
+	border-right: 3px solid gray;
+	border-bottom: 3px solid gray;
+	outline: 2px solid black;
+}
+
+.button:hover {
+	background-color: lightgrey;
+}
+
+.button:active {
+	background-color: darkgray;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	margin: 50px;
+}
+
+.container label {
+	margin-bottom: 10px;
+}
+
+.container input[type="text"],
+.container input[type="password"] {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 20px;
+	box-sizing: border-box;
+}
+
+.container input[type="submit"] {
+	background-color: #4CAF50;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
