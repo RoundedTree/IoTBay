@@ -14,6 +14,17 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Avenir">
     </head>
     <body>
-        <h1 class="title">Login</h1>
+        <div class="container">
+			<h2>Login</h2>
+			<form action="welcome.jsp" method="post">
+				<label for="username">Username:</label>
+				<input type="text" id="username" name="username">
+
+				<label for="password">Password:</label>
+				<input type="password" id="password" name="password">
+
+				<input type="submit" value="Login">
+			</form>
+		</div>
     </body>
 </html>

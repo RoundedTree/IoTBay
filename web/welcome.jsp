@@ -19,7 +19,7 @@
 			String password = request.getParameter("password");
 			String confirmPassword = request.getParameter("confirmPassword");
 
-			if (username != null && password != null && confirmPassword != null && password.equals(confirmPassword)) {
+			if (username != null && password != null && confirmPassword != null /*&& password.equals(confirmPassword)*/) {
 				User user = new User(username, password);
 				session.setAttribute("user", user);
 		%>
