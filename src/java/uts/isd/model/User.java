@@ -10,10 +10,12 @@ package uts.isd.model;
  */
 public class User {
 	private String username, password;
+        private boolean loggedIn;
 
-	public User(String username, String password) {
+	public User(String username, String password, boolean loggedIn) {
 		this.username = username;
 		this.password = password;
+                this.loggedIn = loggedIn;
 	}
 
 	public String getUsername() {
@@ -31,4 +33,15 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
+        
+        
+        
 }
