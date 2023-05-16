@@ -23,5 +23,6 @@
 				<button class="button" type="submit">Register</button>
 			</form>
 		</div
+        <jsp:include page="/ConnServlet" flush="true" />
     </body>
 </html>
