@@ -13,6 +13,7 @@ package uts.isd.controller;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -28,6 +29,8 @@ public class ConnServlet extends HttpServlet {
     private DBConnector db;
     private DBManager manager;
     private Connection conn;
+    private OrdersDAO orders;
+    private ArrayList<Order> orderList;
 
     @Override //Create and instance of DBConnector for the deployment session
 
@@ -54,8 +57,9 @@ public class ConnServlet extends HttpServlet {
         try {
 
             manager = new DBManager(conn);
+            orders = new OrdersDAO(conn);
             
-
+            orderList = orders.fetchOrders();
 
         } catch (SQLException ex) {
 
@@ -64,7 +68,9 @@ public class ConnServlet extends HttpServlet {
 
         //export the DB manager to the view-session (JSPs)
         session.setAttribute("manager", manager);
+        session.setAttribute("orders", orders);
         
+        session.setAttribute("orderList", orderList);
 
     }
 

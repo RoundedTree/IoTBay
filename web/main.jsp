@@ -22,6 +22,7 @@
         <h2>Welcome!</h2>
         <p>Your username is ${user.username} and your password is ${user.password}</p>
         <br><br>
+        <a href="orderManage.jsp">Order management</a>
         <p>Click <a href="logout.jsp">here</a> to logout. :)</p>
         <%
         } else {
