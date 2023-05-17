@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import uts.isd.model.Order;
 import java.util.Date;
+import uts.isd.model.Cart;
 
 /**
  *
@@ -37,5 +38,19 @@ public class OrdersDAO {
     }
     return temp;
 }
+    
+    public ArrayList<Cart> fetchCart(int orderID) throws SQLException {
+        String fetch = "SELECT * FROM ISDUSER.CART WHERE ORDERID=" + orderID + " ";
+        System.out.print(fetch);
+        ResultSet rs = st.executeQuery(fetch);
+        ArrayList<Cart> temp = new ArrayList();
+        while (rs.next()) {
+        int id = rs.getInt(1);
+        int productID = rs.getInt(2);
+        temp.add(new Cart(id, productID));
+    }
+    return temp;
+        
+    }
     
 }

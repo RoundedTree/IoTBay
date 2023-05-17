@@ -28,7 +28,7 @@
               <th>Order ID</th>
               <th>Order Date</th>
               <th>Order Total</th>
-              <th>Edit</th>
+              <th>View</th>
             </tr>
             <%
                 if(orders != null) {
@@ -40,7 +40,11 @@
               <td><%=order.getOrderID() %></td>
               <td><%=order.getOrderDate() %></td>
               <td><%=order.getOrderTotal() %></td>
-              <td><button>Edit</button></td>
+              <td>
+                  <form action="CartSearchController" method="get">
+                      <button type="submit" name="editOrderId" value="<%= order.getOrderID()%>">View Details</button>
+                  </form>
+              </td>
             </tr>
             <%
                         }
