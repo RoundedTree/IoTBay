@@ -1,38 +1,35 @@
 <%-- 
-    Document   : orderManage
-    Created on : 16/05/2023, 8:02:29 PM
+    Document   : orderSearch
+    Created on : 18/05/2023, 12:25:55 AM
     Author     : Andy
 --%>
 
+<%@page import="uts.isd.model.Order"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="uts.isd.model.*" %>
-<link rel="stylesheet" type="text/css" href="basicstyle.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Avenir">
-
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body>
-        <%
-            ArrayList<Order> orders = (ArrayList<Order>) session.getAttribute("orderList");
+    <%
+            ArrayList<Order> orders = (ArrayList<Order>) session.getAttribute("searchedOrders");
             
             %>
-        
-        <h1>Order Management</h1>
+    <body>
+        <h1>Search Results!</h1>
         <%
             if(orders.isEmpty()) {
             %>
             <p>
-                 No orders found!
+                 No results found! 
+                 <a href="orderManage.jsp">Search again?</a>
             </p> 
-        <%
-
-        } else {
-        %>
+            <%
+            
+            } else {
+            %>
         <table>
             <tr>
               <th>Order ID</th>
@@ -62,20 +59,9 @@
                 }
                 %>
         </table>
-                <%
-                    }
-                    %>
-        
-        <h3>Search</h3>
-        <form method="get" action="OrderSearchController">
-            <label>OrderId</label>
-            <input name="searchID" placeholder="Order ID">
-            <label>Order Date</label>
-            <input name="searchDate" placeholder="mm/dd/yyyy">
-            <button type="submit">Search</button>
-        </form>
-        
-       
+        <%
+            }
+            %>
         <a href="main.jsp">Return Home</a>
     </body>
 </html>

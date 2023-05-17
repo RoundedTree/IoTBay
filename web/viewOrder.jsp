@@ -12,6 +12,9 @@
     <%
         String id = request.getParameter("editOrderId");
         ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cartItems");
+        if(!cart.isEmpty()) {
+            System.out.print("test");
+        }
         
         %>
     <head>
@@ -21,24 +24,43 @@
     <body>
         <h1>Order #<%=id %></h1>
         <h2>Cart Details</h2>
+        <%
+            if(cart.isEmpty()) {
+            System.out.print("erro");
+            %>
+            <p>
+                 Empty cart! Add items!
+            </p> 
+            <%
+            
+            } else {
+            %>
         <table>
             <tr>
+                <th>Cart ID</th>
                 <th>Order ID</th>
                 <th>Product ID</th>
                 <th>Edit</th>
             </tr>
         <%
-                if(cart != null) {
+                if(cart != null || !cart.isEmpty()) {
                     for (Cart car : cart) {
-                
                 %>
             <tr>
+                <td><%=car.getCartID() %></td>
                 <td><%=car.getOrderID() %></td>
                 <td><%=car.getProductID() %></td>
+                <td>
+                    <form method="post" action="RemoveItemCartController">
+                         <button type="submit" name="cartID" value="<%= car.getCartID() %>" > Delete</button>
+                    </form>
+                   
+                </td>
             </tr>
-                <%
-                        }
+        <%
                     }
+                }
+            }
                 %>
         </table>
         <a href="orderManage.jsp">Back</a>

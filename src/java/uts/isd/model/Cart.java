@@ -10,12 +10,22 @@ package uts.isd.model;
  */
 public class Cart {
 
+    private int cartID;
     private int orderID;
     private int productID;
     
-    public Cart(int orderID, int productID) {
+    public Cart(int cartID, int orderID, int productID) {
+        this.cartID = cartID;
         this.orderID = orderID;
         this.productID = productID;
+    }
+
+    public int getCartID() {
+        return cartID;
+    }
+
+    public void setCartID(int cartID) {
+        this.cartID = cartID;
     }
 
     public int getOrderID() {

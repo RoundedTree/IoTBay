@@ -24,6 +24,11 @@ public class OrdersDAO {
     st = conn.createStatement(); 
     }
     
+    public void removeItem(int cartID) throws SQLException{       
+    st.executeUpdate("DELETE FROM ISDUSER.CART WHERE CARTID=" + cartID + " ");
+    System.out.print("Item removed from cart!!!");
+    }
+    
     public ArrayList<Order> fetchOrders() throws SQLException {
     String fetch = "SELECT * FROM ISDUSER.ORDERS";
     ResultSet rs = st.executeQuery(fetch);
@@ -37,7 +42,32 @@ public class OrdersDAO {
         temp.add(new Order(id, userId, date, total));
     }
     return temp;
-}
+    }
+    
+    
+    public ArrayList<Order> searchOrder(int orderID, String orderDate) throws SQLException{
+        String fetch;
+        if (orderDate == "") {
+            fetch = "SELECT * FROM ISDUSER.ORDERS WHERE ORDERID=" + orderID + " ";
+        } else if (orderID == 0) { //orderID is never 0
+            fetch = "SELECT * FROM ISDUSER.ORDERS WHERE ORDERDATE='" + orderDate + "'";
+        } else {
+            System.out.print("SELECT * FROM ISDUSER.ORDERS WHERE ORDERDATE='" + orderDate + "' AND ORDERID="+ orderID +" ");
+            fetch = "SELECT * FROM ISDUSER.ORDERS WHERE ORDERDATE='" + orderDate + "' AND ORDERID="+ orderID +" ";
+        }
+        
+        ResultSet rs = st.executeQuery(fetch);
+        ArrayList<Order> temp = new ArrayList();
+    
+    while (rs.next()) {
+        int id = rs.getInt(1);
+        int userId = rs.getInt(2);
+        Date date = rs.getDate(3);
+        double total = rs.getDouble(4);
+        temp.add(new Order(id, userId, date, total));
+    }
+    return temp;
+    }
     
     public ArrayList<Cart> fetchCart(int orderID) throws SQLException {
         String fetch = "SELECT * FROM ISDUSER.CART WHERE ORDERID=" + orderID + " ";
@@ -45,9 +75,10 @@ public class OrdersDAO {
         ResultSet rs = st.executeQuery(fetch);
         ArrayList<Cart> temp = new ArrayList();
         while (rs.next()) {
-        int id = rs.getInt(1);
-        int productID = rs.getInt(2);
-        temp.add(new Cart(id, productID));
+        int cartID = rs.getInt(1);
+        int id = rs.getInt(2);
+        int productID = rs.getInt(3);
+        temp.add(new Cart(cartID, id, productID));
     }
     return temp;
         
