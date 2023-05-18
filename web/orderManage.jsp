@@ -18,7 +18,10 @@
     </head>
     <body>
         <%
+            //TODO Add orders and cart items
             ArrayList<Order> orders = (ArrayList<Order>) session.getAttribute("orderList");
+            //TODO get User object session attribute when USER object implemented to get userID
+            int userID = (Integer) session.getAttribute("tempUserid");
             
             %>
         
@@ -38,21 +41,24 @@
               <th>Order ID</th>
               <th>Order Date</th>
               <th>Order Total</th>
-              <th>View</th>
+              <th>Edit Order</th>
             </tr>
             <%
                 if(orders != null) {
                     for (Order order : orders) {
-                    if(order.getUserID() == 100) {
+                    if(order.getUserID() == userID) {
                 
                 %>
             <tr>
               <td><%=order.getOrderID() %></td>
               <td><%=order.getOrderDate() %></td>
               <td><%=order.getOrderTotal() %></td>
-              <td>
-                  <form action="CartSearchController" method="get">
-                      <button type="submit" name="editOrderId" value="<%= order.getOrderID()%>">View Details</button>
+              <td class="orderEditCell">
+                  <form class="orderEditForm" action="CartSearchController" method="get">
+                      <button type="submit" name="editOrderId" value="<%= order.getOrderID()%>">View Cart</button>
+                  </form>
+                  <form class="orderEditForm"action="RemoveOrderController" method="post">
+                      <button type="submit" name="orderID" value="<%= order.getOrderID()%>">Delete Order</button>
                   </form>
               </td>
             </tr>

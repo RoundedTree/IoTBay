@@ -9,6 +9,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <link rel="stylesheet" type="text/css" href="basicstyle.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Avenir">
     <%
         String id = request.getParameter("editOrderId");
         ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cartItems");

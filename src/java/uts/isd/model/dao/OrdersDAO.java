@@ -25,8 +25,19 @@ public class OrdersDAO {
     }
     
     public void removeItem(int cartID) throws SQLException{       
-    st.executeUpdate("DELETE FROM ISDUSER.CART WHERE CARTID=" + cartID + " ");
+    st.executeUpdate("DELETE FROM ISDUSER.CART WHERE CARTID=" + cartID + "");
     System.out.print("Item removed from cart!!!");
+    }
+    
+    public void removeOrder(int orderID) throws SQLException{
+    System.out.print("Test!");
+    st.executeUpdate("DELETE FROM ISDUSER.CART WHERE ORDERID=" + orderID + "");
+    System.out.print("Carts dropped!");
+    
+    st.executeUpdate("DELETE FROM ISDUSER.ORDERS WHERE ORDERID=" + orderID + "");
+    System.out.print("Order dropped!");
+    
+    
     }
     
     public ArrayList<Order> fetchOrders() throws SQLException {

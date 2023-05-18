@@ -60,6 +60,7 @@ public class ConnServlet extends HttpServlet {
             orders = new OrdersDAO(conn);
             
             orderList = orders.fetchOrders();
+            
 
         } catch (SQLException ex) {
 
@@ -71,6 +72,10 @@ public class ConnServlet extends HttpServlet {
         session.setAttribute("orders", orders);
         
         session.setAttribute("orderList", orderList);
+        
+        //Temporary hardcoded userID for order management. Remove when Users object fully implemented
+        int id = 100;
+        session.setAttribute("tempUserid", id);
 
     }
 
