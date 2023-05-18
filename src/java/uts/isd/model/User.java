@@ -9,21 +9,39 @@ package uts.isd.model;
  * @author Pluuskie
  */
 public class User {
-	private String username, password;
-        private boolean loggedIn;
+	private int id;
+	private String name, email, password, phoneNumber, role;
 
-	public User(String username, String password, boolean loggedIn) {
-		this.username = username;
+	public User(int id, String name, String email, String password, String role) {
+		this.id = id;
+		this.name = name;
+		this.email = email;
 		this.password = password;
-                this.loggedIn = loggedIn;
+		this.role = role;
 	}
 
-	public String getUsername() {
-		return username;
+	public int getId() {
+		return id;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
@@ -34,14 +52,19 @@ public class User {
 		this.password = password;
 	}
 
-    public boolean isLoggedIn() {
-        return loggedIn;
-    }
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
 
-    public void setLoggedIn(boolean loggedIn) {
-        this.loggedIn = loggedIn;
-    }
-        
-        
-        
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 }

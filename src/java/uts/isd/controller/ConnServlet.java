@@ -2,14 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package uts.isd.controller;
 
 /**
  *
  * @author Andy
  */
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -26,72 +24,69 @@ import uts.isd.model.*;
 
 public class ConnServlet extends HttpServlet {
 
-    private DBConnector db;
-    private DBManager manager;
-    private Connection conn;
-    private OrdersDAO orders;
-    private ArrayList<Order> orderList;
+	private DBConnector db;
+	private DBManager manager;
+	private Connection conn;
+	private OrdersDAO orders;
+	private ArrayList<Order> orderList;
 
-    @Override //Create and instance of DBConnector for the deployment session
+	@Override //Create and instance of DBConnector for the deployment session
 
-    public void init() {
-        System.out.println("ConnServlet init");
-        try {
-            db = new DBConnector();
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(ConnServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+	public void init() {
+		System.out.println("ConnServlet init");
+		try {
+			db = new DBConnector();
+		} catch (ClassNotFoundException | SQLException ex) {
+			Logger.getLogger(ConnServlet.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
 
-    @Override //Add the DBConnector, DBManager, Connection instances to the session
+	@Override //Add the DBConnector, DBManager, Connection instances to the session
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-        System.out.println("DoGet called");
-        response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
+		System.out.println("DoGet called");
+		response.setContentType("text/html;charset=UTF-8");
+		HttpSession session = request.getSession();
 
-        conn = db.openConnection();
+		conn = db.openConnection();
 
-        try {
+		try {
 
-            manager = new DBManager(conn);
-            orders = new OrdersDAO(conn);
-            
-            orderList = orders.fetchOrders();
-            
+			manager = new DBManager(conn);
+			orders = new OrdersDAO(conn);
+			orderList = orders.fetchOrders();
 
-        } catch (SQLException ex) {
+		} catch (SQLException ex) {
 
-            Logger.getLogger(ConnServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+			Logger.getLogger(ConnServlet.class.getName()).log(Level.SEVERE, null, ex);
+		}
 
-        //export the DB manager to the view-session (JSPs)
-        session.setAttribute("manager", manager);
-        session.setAttribute("orders", orders);
-        
-        session.setAttribute("orderList", orderList);
-        
-        //Temporary hardcoded userID for order management. Remove when Users object fully implemented
-        int id = 100;
-        session.setAttribute("tempUserid", id);
+		//export the DB manager to the view-session (JSPs)
+		session.setAttribute("manager", manager);
+		session.setAttribute("orders", orders);
+		session.setAttribute("orderList", orderList);
 
-    }
+		//Temporary hardcoded userID for order management. Remove when Users object fully implemented
+		int id = 100;
+		session.setAttribute("tempUserid", id);
 
-    @Override //Destroy the servlet and release the resources of the application (terminate also the db connection)
+	}
 
-    public void destroy() {
+	@Override //Destroy the servlet and release the resources of the application (terminate also the db connection)
 
-        try {
+	public void destroy() {
 
-            db.closeConnection();
+		try {
 
-        } catch (SQLException ex) {
+			db.closeConnection();
 
-            Logger.getLogger(ConnServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+		} catch (SQLException ex) {
 
-    }
+			Logger.getLogger(ConnServlet.class.getName()).log(Level.SEVERE, null, ex);
+		}
+
+	}
 
 }

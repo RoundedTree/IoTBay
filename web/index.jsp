@@ -14,7 +14,7 @@
         <title>Home</title>
     </head>
     <body>
-        <h1 class="title">IoTBay</h1>
+        <h1 class="index-title">IoTBay</h1>
 		<div class="buttoncontainer">
 			<form action="login.jsp" method="get">
 				<button class="button" type="submit">Login</button>

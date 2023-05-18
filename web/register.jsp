@@ -7,28 +7,24 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Register</title>
+	<head>
+		<title>Register</title>
 		<link rel="stylesheet" type="text/css" href="basicstyle.css">
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Avenir">
-    </head>
-    <body>
-        <h1 class="title">Register</h1>
-		<div class="container">
-			<h2>Registration Form</h2>
-			<form action="login.jsp" method="post">
-				<label for="regUsername">Username:</label>
-				<input type="text" id="regUsername" name="regUsername">
+	</head>
+	<body>
+		<div class="title">Register</div>
+		<form action="RegisterController" method="POST" class="container">
+			<label for="name">Name</label>
+			<input type="text" id="name" name="name" required>
 
-				<label for="regPxassword">Password:</label>
-				<input type="password" id="regPassword" name="regPassword">
+			<label for="email">Email</label>
+			<input type="text" id="email" name="email" required>
 
-				<label for="confirmPassword">Confirm Password:</label>
-				<input type="password" id="confirmPassword" name="confirmPassword">
+			<label for="password">Password</label>
+			<input type="password" id="password" name="password" required>
 
-				<input type="submit" value="Submit">
-			</form>
-                </div>
-    </body>
+			<input type="submit" name="action" value="Register">
+		</form>
+	</body>
 </html>
+

@@ -15,21 +15,10 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Avenir">
     </head>
     <body>
-        <%
-            User user = (User) session.getAttribute("user");
-            if (user.isLoggedIn() == true) {
-        %>
         <h2>Welcome!</h2>
-        <p>Your username is ${user.username} and your password is ${user.password}</p>
+        <p>You're A BUTTHOLE</p>
         <br><br>
         <a href="orderManage.jsp">Order management</a>
-        <p>Click <a href="logout.jsp">here</a> to logout. :)</p>
-        <%
-        } else {
-        %>
-        <p>Something has gone horribly wrong. Click <a href="index.jsp">here</a> to return.</p>
-        <%
-            }
-        %>
+
     </body>
 </html>
