@@ -13,13 +13,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import uts.isd.model.User;
+import uts.isd.model.UserActivityLog;
 import uts.isd.model.dao.DBManager;
+import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  *
  * @author Pluuskie
  */
-
 public class LogsController extends HttpServlet {
 
 	@Override
@@ -31,7 +33,16 @@ public class LogsController extends HttpServlet {
 
 		if (user != null) {
 			try {
-				List<String> logs = manager.getUserActivityLogs(user.getId());
+				String startDateParam = request.getParameter("startDate");
+				String endDateParam = request.getParameter("endDate");
+
+				// Use reasonable defaults if no dates are provided
+				Date startDate = startDateParam != null ? Date.valueOf(startDateParam)
+						: Date.valueOf(LocalDate.now().minusYears(10));
+				Date endDate = endDateParam != null ? Date.valueOf(endDateParam)
+						: Date.valueOf(LocalDate.now());
+
+				List<UserActivityLog> logs = manager.getUserActivityLogs(user.getId(), startDate, endDate);
 				request.setAttribute("logs", logs);
 				request.getRequestDispatcher("logs.jsp").forward(request, response);
 			} catch (SQLException ex) {

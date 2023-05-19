@@ -5,30 +5,48 @@
 --%>
 
 <%@page import="java.util.List"%>
+<%@page import="uts.isd.model.UserActivityLog"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>User Logs</title>
-        <link rel="stylesheet" type="text/css" href="basicstyle.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Avenir">
+        <title>Logs</title>
+	<link rel="stylesheet" type="text/css" href='basicstyle.css"'>
+	 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Avenir">
     </head>
+	<jsp:include page="header.jsp" />
     <body>
-        <jsp:include page="header.jsp" />
         <div class="container">
-            <h2>User Logs</h2>
-            <%
-				List<String> logs = (List<String>) request.getAttribute("logs");
-				if (logs != null && !logs.isEmpty()) {
-					for (String log : logs) {
-						out.println("<p>" + log + "</p>");
-					}
-				} else {
-					out.println("<p>No logs to show.</p>");
-				}
-            %>
+            <h1 class="title">Activity Logs</h1>
+            <form action="LogsController" method="get">
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" name="startDate" />
+
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate" name="endDate" />
+
+                <input type="submit" class="button" value="Filter" />
+            </form>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Activity</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% List<UserActivityLog> logs = (List<UserActivityLog>) request.getAttribute("logs");
+						for (UserActivityLog log : logs) {%>
+                    <tr>
+                        <td><%= log.getActivityType()%></td>
+                        <td><%= log.getDate()%></td>
+                    </tr>
+                    <% }%>
+                </tbody>
+            </table>
         </div>
     </body>
 </html>
+
 
