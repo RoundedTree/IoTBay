@@ -32,7 +32,6 @@
             %>
             <p>
                  No results found! 
-                 <a href="orderManage.jsp">Search again?</a>
             </p> 
             <%
             
@@ -57,7 +56,7 @@
               <td><%=order.getOrderTotal() %></td>
               <td class="orderEditCell">
                   <form class="orderEditForm" action="CartSearchController" method="get">
-                      <button type="submit" name="editOrderId" value="<%= order.getOrderID()%>">View Cart</button>
+                      <button type="submit" name="orderID" value="<%= order.getOrderID()%>">View Cart</button>
                   </form>
                   <form class="orderEditForm"action="RemoveOrderController" method="post">
                       <button type="submit" name="orderID" value="<%= order.getOrderID()%>">Delete Order</button>
@@ -83,6 +82,8 @@
         <%}
             }
             %>
-        <a href="main.jsp">Return Home</a>
+            <p><a href="orderManage.jsp">Search again?</a></p>
+            <footer><a href="main.jsp">Return Home</a></footer>
+            
     </body>
 </html>

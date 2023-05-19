@@ -27,18 +27,12 @@ public class CartSearchController extends HttpServlet {
         HttpSession session = request.getSession();
         OrdersDAO ordersDao = (OrdersDAO) session.getAttribute("orders");
         try{
-            System.out.print("test2");
             ArrayList<Cart> temp = new ArrayList();
             int id;
-            System.out.print("test3");
-            String i = (request.getParameter("editOrderId"));
-            System.out.print(i);
+            String i = (request.getParameter("orderID"));
             id = parseInt(i);
-            System.out.print(id);
             temp = ordersDao.fetchCart(id);
-            System.out.print(temp);
             session.setAttribute("cartItems", temp);
-            System.out.print("Success???");
             request.getRequestDispatcher("viewOrder.jsp").include(request, response);
         } catch(SQLException ex) {
             

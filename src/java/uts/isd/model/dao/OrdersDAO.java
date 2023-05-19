@@ -63,15 +63,14 @@ public class OrdersDAO {
     }
     
     
-    public ArrayList<Order> searchOrder(int orderID, String orderDate) throws SQLException{
+    public ArrayList<Order> searchOrder(int orderID, String orderDate, int userID) throws SQLException{
         String fetch;
         if (orderDate == "") {
-            fetch = "SELECT * FROM ORDERS WHERE ORDERID=" + orderID + " ";
+            fetch = "SELECT * FROM ORDERS WHERE ORDERID=" + orderID + " AND USERID="+ userID +"";
         } else if (orderID == 0) { //orderID is never 0
-            fetch = "SELECT * FROM ORDERS WHERE ORDERDATE='" + orderDate + "'";
+            fetch = "SELECT * FROM ORDERS WHERE ORDERDATE='" + orderDate + "' AND USERID="+ userID +"";
         } else {
-            System.out.print("SELECT * FROM ORDERS WHERE ORDERDATE='" + orderDate + "' AND ORDERID="+ orderID +" ");
-            fetch = "SELECT * FROM ORDERS WHERE ORDERDATE='" + orderDate + "' AND ORDERID="+ orderID +" ";
+            fetch = "SELECT * FROM ORDERS WHERE ORDERDATE='" + orderDate + "' AND ORDERID="+ orderID +" AND USERID="+ userID +"";
         }
         
         ResultSet rs = st.executeQuery(fetch);

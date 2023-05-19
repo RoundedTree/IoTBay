@@ -28,7 +28,6 @@ public class OrderSearchController extends HttpServlet  {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.print("first test");
         HttpSession session = request.getSession();
         OrdersDAO ordersDao = (OrdersDAO) session.getAttribute("orders");
         OrderSearchValidator validate = new OrderSearchValidator();
@@ -37,8 +36,8 @@ public class OrderSearchController extends HttpServlet  {
             ArrayList<Order> temp = new ArrayList();
             String searchID = (request.getParameter("searchID"));
             String searchDate = (request.getParameter("searchDate"));
-//            String test = "12/12/2015";
-
+            String user = (request.getParameter("userID"));
+            int userId = parseInt(user);
             //Clearing error attributes
             validate.clear(session);
             int id = 0;
@@ -52,7 +51,7 @@ public class OrderSearchController extends HttpServlet  {
                 searchDate = "";
             }
             
-            temp = ordersDao.searchOrder(id,  searchDate);
+            temp = ordersDao.searchOrder(id,  searchDate, userId);
             session.setAttribute("searchedOrders", temp);
             request.getRequestDispatcher("orderSearch.jsp").include(request, response);
         } catch(SQLException ex) {

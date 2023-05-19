@@ -19,9 +19,7 @@
     </head>
     <body>
         <%
-            //TODO Add orders and cart items
             ArrayList<Order> orders = (ArrayList<Order>) session.getAttribute("orderList");
-            //TODO get User object session attribute when USER object implemented to get userID
             User user = (User) session.getAttribute("user");
             int userID = user.getId();
             String userName = user.getName();
@@ -40,6 +38,7 @@
 
         } else {
         %>
+        <h2>Saved Orders</h2>
         <table>
             <tr>
               <th>Order ID</th>
@@ -57,10 +56,15 @@
               <td><%=order.getOrderTotal() %></td>
               <td class="orderEditCell">
                   <form class="orderEditForm" action="CartSearchController" method="get">
-                      <button type="submit" name="editOrderId" value="<%= order.getOrderID()%>">View Cart</button>
+                      <button type="submit" name="orderID" value="<%= order.getOrderID()%>">View Cart</button>
                   </form>
                   <form class="orderEditForm"action="RemoveOrderController" method="post">
                       <button type="submit" name="orderID" value="<%= order.getOrderID()%>">Delete Order</button>
+                  </form>
+              </td>
+              <td>
+                  <form>
+                      <button >Submit order</button>
                   </form>
               </td>
             </tr>
@@ -82,8 +86,10 @@
             <input name="searchID" placeholder="Order ID">
             <label>Order Date</label>
             <input name="searchDate" placeholder="mm/dd/yyyy">
-            <button type="submit">Search</button>
+            <button type="submit" name="userID" value=<%= userID %>>Search</button>
         </form>
+        
+        <h3>Placed Orders</h3>
         <%
             } else {
             %>
@@ -92,6 +98,6 @@
             }
             %>
        
-        <a href="main.jsp">Return Home</a>
+        <footer><a href="main.jsp">Return Home</a></footer>
     </body>
 </html>

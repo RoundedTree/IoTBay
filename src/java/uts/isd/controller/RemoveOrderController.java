@@ -26,7 +26,6 @@ public class RemoveOrderController extends HttpServlet {
         HttpSession session = request.getSession();
         OrdersDAO ordersDao = (OrdersDAO) session.getAttribute("orders");
         try{
-            System.out.print("testttt");
             int id;
             String i = (request.getParameter("orderID"));
             System.out.print(i);
@@ -39,7 +38,7 @@ public class RemoveOrderController extends HttpServlet {
             ArrayList<Order> orderList = ordersDao.fetchOrders();
             session.setAttribute("orderList", orderList);
             
-            request.getRequestDispatcher("main.jsp").include(request, response);
+            request.getRequestDispatcher("orderManage.jsp").include(request, response);
         } catch(SQLException ex) {
             
         }

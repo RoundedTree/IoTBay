@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="basicstyle.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Avenir">
     <%
-        String id = request.getParameter("editOrderId");
+        String id = request.getParameter("orderID");
         ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cartItems");
         if(!cart.isEmpty()) {
             System.out.print("test");
@@ -69,5 +69,6 @@
             <button type="submit" name="orderID" value="<%= id %>" > Add to cart</button>
         </form>
         <a href="orderManage.jsp">Back</a>
+        <footer><a href="main.jsp">Return Home</a></footer>
     </body>
 </html>

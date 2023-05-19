@@ -24,19 +24,24 @@ public class AddItemCartController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         OrdersDAO ordersDao = (OrdersDAO) session.getAttribute("orders");
+        OrderSearchValidator validate = new OrderSearchValidator();
         try{
             String orderID = (request.getParameter("orderID"));
             String productID = (request.getParameter("productID"));
             
             int id = parseInt(orderID);
-            int product = parseInt(productID);
             
-            System.out.print(id);
-            System.out.print(product);
+            
             System.out.print("Updating cart");
-            ordersDao.addCartItem(id, product);
-
-            request.getRequestDispatcher("orderManage.jsp").include(request, response);
+            
+            if (validate.validateID(productID)) {
+                int product = parseInt(productID);
+                ordersDao.addCartItem(id, product);
+                request.getRequestDispatcher("orderManage.jsp").include(request, response);
+            }else {
+                request.getRequestDispatcher("orderManage.jsp").include(request, response);
+            }
+            
         } catch(SQLException ex) {
             
         }

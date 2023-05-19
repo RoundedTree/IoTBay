@@ -48,7 +48,7 @@ public class AddOrderController  extends HttpServlet {
             session.setAttribute("orderList", orderList);
             
             System.out.print("Finishing?");
-            request.getRequestDispatcher("main.jsp").include(request, response);
+            request.getRequestDispatcher("orderManage.jsp").include(request, response);
         } catch(SQLException ex) {
             
         }
