@@ -10,6 +10,7 @@
 	<head>
 		<title>Register</title>
 		<link rel="stylesheet" type="text/css" href="basicstyle.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Avenir">
 	</head>
 	<body>
 		<div class="title">Register</div>
