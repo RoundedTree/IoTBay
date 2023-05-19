@@ -56,7 +56,6 @@
                     <form method="post" action="RemoveItemCartController">
                          <button type="submit" name="cartID" value="<%= car.getCartID() %>" > Delete</button>
                     </form>
-                   
                 </td>
             </tr>
         <%
@@ -65,6 +64,10 @@
             }
                 %>
         </table>
+        <form method="post" action="AddItemCartController">
+            <input name="productID" placeholder="Enter product ID">
+            <button type="submit" name="orderID" value="<%= id %>" > Add to cart</button>
+        </form>
         <a href="orderManage.jsp">Back</a>
     </body>
 </html>

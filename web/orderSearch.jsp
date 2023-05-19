@@ -19,12 +19,16 @@
     </head>
     <%
             ArrayList<Order> orders = (ArrayList<Order>) session.getAttribute("searchedOrders");
-            int userID = (Integer) session.getAttribute("tempUserid");
+            User user = (User) session.getAttribute("user");
+            int userID = user.getId();
+            String errorID = (String) session.getAttribute("orderSearchErrID");
+            String errorDate = (String) session.getAttribute("orderSearchErrDate");
             %>
     <body>
         <h1>Search Results!</h1>
         <%
-            if(orders.isEmpty()) {
+            if(errorID == null  &&  errorDate==null) {
+                if(orders.isEmpty()) {
             %>
             <p>
                  No results found! 
@@ -67,6 +71,16 @@
                 %>
         </table>
         <%
+                }
+            } else {
+            if (errorID != null) {
+            %>
+            <p><%=errorID%></p>
+            <%}
+            if (errorDate != null) {
+            %>
+            <p><%=errorDate%></p>
+        <%}
             }
             %>
         <a href="main.jsp">Return Home</a>
