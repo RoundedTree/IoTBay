@@ -7,6 +7,8 @@ package uts.isd.controller;
 import java.io.IOException;
 import static java.lang.Integer.parseInt;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,29 +25,33 @@ import uts.isd.model.dao.OrdersDAO;
  * @author Andy
  */
 public class OrderSearchController extends HttpServlet  {
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.print("first test");
         HttpSession session = request.getSession();
         OrdersDAO ordersDao = (OrdersDAO) session.getAttribute("orders");
+        OrderSearchValidator validate = new OrderSearchValidator();
         
         try {
             ArrayList<Order> temp = new ArrayList();
-            System.out.print("first test");
-            // TODO error handling
             String searchID = (request.getParameter("searchID"));
             String searchDate = (request.getParameter("searchDate"));
-//            String test = "12/12/2015";
+            String user = (request.getParameter("userID"));
+            int userId = parseInt(user);
+            //Clearing error attributes
+            validate.clear(session);
             int id = 0;
-            try {
-                Integer.parseInt( searchID );
-                id = Integer.parseInt( searchID );
+            if (!validate.validateID(searchID) && !validate.validateString(searchID)) {
+                session.setAttribute("orderSearchErrID", "Invalid orderID number entered!");
+            }  else if (!validate.validateString(searchID)){
+                id = parseInt(searchID);
             }
-            catch( Exception e ) {
-                id = 0;
+            if(!validate.validateDate(searchDate) && !validate.validateString(searchDate)) {
+                session.setAttribute("orderSearchErrDate", "Invalid date entered!");
+                searchDate = "";
             }
             
-            temp = ordersDao.searchOrder(id,  searchDate);
+            temp = ordersDao.searchOrder(id,  searchDate, userId);
             session.setAttribute("searchedOrders", temp);
             request.getRequestDispatcher("orderSearch.jsp").include(request, response);
         } catch(SQLException ex) {

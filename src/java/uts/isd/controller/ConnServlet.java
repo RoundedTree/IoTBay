@@ -29,6 +29,7 @@ public class ConnServlet extends HttpServlet {
 	private Connection conn;
 	private OrdersDAO orders;
 	private ArrayList<Order> orderList;
+        private ArrayList<Order> submitList;
 
 	@Override //Create and instance of DBConnector for the deployment session
 
@@ -57,6 +58,7 @@ public class ConnServlet extends HttpServlet {
 			manager = new DBManager(conn);
 			orders = new OrdersDAO(conn);
 			orderList = orders.fetchOrders();
+                        submitList = orders.fetchSubmittedOrders();
 
 		} catch (SQLException ex) {
 
@@ -67,10 +69,7 @@ public class ConnServlet extends HttpServlet {
 		session.setAttribute("manager", manager);
 		session.setAttribute("orders", orders);
 		session.setAttribute("orderList", orderList);
-
-		//Temporary hardcoded userID for order management. Remove when Users object fully implemented
-		int id = 100;
-		session.setAttribute("tempUserid", id);
+                session.setAttribute("submittedOrders", submitList);
 
 	}
 

@@ -17,18 +17,22 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
+    <jsp:include page="header.jsp" />
     <%
             ArrayList<Order> orders = (ArrayList<Order>) session.getAttribute("searchedOrders");
-            int userID = (Integer) session.getAttribute("tempUserid");
+            User user = (User) session.getAttribute("user");
+            int userID = user.getId();
+            String errorID = (String) session.getAttribute("orderSearchErrID");
+            String errorDate = (String) session.getAttribute("orderSearchErrDate");
             %>
     <body>
         <h1>Search Results!</h1>
         <%
-            if(orders.isEmpty()) {
+            if(errorID == null  &&  errorDate==null) {
+                if(orders.isEmpty()) {
             %>
             <p>
                  No results found! 
-                 <a href="orderManage.jsp">Search again?</a>
             </p> 
             <%
             
@@ -53,7 +57,7 @@
               <td><%=order.getOrderTotal() %></td>
               <td class="orderEditCell">
                   <form class="orderEditForm" action="CartSearchController" method="get">
-                      <button type="submit" name="editOrderId" value="<%= order.getOrderID()%>">View Cart</button>
+                      <button type="submit" name="orderID" value="<%= order.getOrderID()%>">View Cart</button>
                   </form>
                   <form class="orderEditForm"action="RemoveOrderController" method="post">
                       <button type="submit" name="orderID" value="<%= order.getOrderID()%>">Delete Order</button>
@@ -67,8 +71,19 @@
                 %>
         </table>
         <%
+                }
+            } else {
+            if (errorID != null) {
+            %>
+            <p><%=errorID%></p>
+            <%}
+            if (errorDate != null) {
+            %>
+            <p><%=errorDate%></p>
+        <%}
             }
             %>
-        <a href="main.jsp">Return Home</a>
+            <p><a href="orderManage.jsp">Search again?</a></p>
+            
     </body>
 </html>

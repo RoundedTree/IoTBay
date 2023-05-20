@@ -7,38 +7,41 @@ package uts.isd.controller;
 import java.io.IOException;
 import static java.lang.Integer.parseInt;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import uts.isd.model.Order;
 import uts.isd.model.dao.OrdersDAO;
 
 /**
  *
  * @author Andy
  */
-public class RemoveOrderController extends HttpServlet {
+public class AddItemCartController extends HttpServlet {
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         OrdersDAO ordersDao = (OrdersDAO) session.getAttribute("orders");
+        OrderSearchValidator validate = new OrderSearchValidator();
         try{
-            int id;
-            String i = (request.getParameter("orderID"));
-            System.out.print(i);
-            id = parseInt(i);
-            System.out.print(i);
-            ordersDao.removeOrder(id);
-            System.out.print("Order removed!");
+            String orderID = (request.getParameter("orderID"));
+            String productID = (request.getParameter("productID"));
             
-            //Update OrderList
-            ArrayList<Order> orderList = ordersDao.fetchOrders();
-            session.setAttribute("orderList", orderList);
+            int id = parseInt(orderID);
             
-            request.getRequestDispatcher("orderManage.jsp").include(request, response);
+            
+            System.out.print("Updating cart");
+            
+            if (validate.validateID(productID)) {
+                int product = parseInt(productID);
+                ordersDao.addCartItem(id, product);
+                request.getRequestDispatcher("orderManage.jsp").include(request, response);
+            }else {
+                request.getRequestDispatcher("orderManage.jsp").include(request, response);
+            }
+            
         } catch(SQLException ex) {
             
         }
