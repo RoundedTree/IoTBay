@@ -4,9 +4,11 @@
     Author     : Andy
 --%>
 
+<%@page import="java.util.Date"%>
 <%@page import="java.util.ArrayList"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="uts.isd.model.*" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 
 
 <!DOCTYPE html>
@@ -17,17 +19,27 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
+    <jsp:include page="header.jsp" />
     <body>
         <%
             ArrayList<Order> orders = (ArrayList<Order>) session.getAttribute("orderList");
+            ArrayList<Order> submittedOrders = (ArrayList<Order>) session.getAttribute("submittedOrders");
+            
+            
             User user = (User) session.getAttribute("user");
-            int userID = user.getId();
-            String userName = user.getName();
+            int userID = 0;
+            String userName = "Anonymous";
+            
+            if (user != null) {
+            userID = user.getId();
+            userName = user.getName();
+            }
             
             %>
         
         <h1>Order Management for <%=userName%></h1>
         <% 
+           if (user != null) {
            if (orders != null) { 
             if(orders.isEmpty()) {
             %>
@@ -63,8 +75,8 @@
                   </form>
               </td>
               <td>
-                  <form>
-                      <button >Submit order</button>
+                  <form method="post" action="SubmitOrderController" >
+                      <button  type="submit" name="orderID" value="<%= order.getOrderID()%>" >Submit order</button>
                   </form>
               </td>
             </tr>
@@ -90,14 +102,43 @@
         </form>
         
         <h3>Placed Orders</h3>
+        
+        <table>
+            <tr>
+              <th>Order ID</th>
+              <th>Order Date</th>
+              <th>Order Total</th>
+            </tr>
+        <%
+                for (Order order : submittedOrders) {
+                if(order.getUserID() == userID) {
+                %>
+            <tr>
+              <td><%=order.getOrderID() %></td>
+              <td><%=order.getOrderDate() %></td>
+              <td><%=order.getOrderTotal() %></td>
+              
+            </tr>
+            <%
+                    }
+                }
+                %>
+        </table>
         <%
             } else {
             %>
         <p>Server Error! Could not fetch orders!</p>
         <%
             }
-            %>
+        } else {
+%>
+           
+            Unregistered
+            
+            <%
+                }
+                %>
        
-        <footer><a href="main.jsp">Return Home</a></footer>
+        
     </body>
 </html>

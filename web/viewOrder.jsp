@@ -23,6 +23,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
+    <jsp:include page="header.jsp" />
     <body>
         <h1>Order #<%=id %></h1>
         <h2>Cart Details</h2>
@@ -69,6 +70,5 @@
             <button type="submit" name="orderID" value="<%= id %>" > Add to cart</button>
         </form>
         <a href="orderManage.jsp">Back</a>
-        <footer><a href="main.jsp">Return Home</a></footer>
     </body>
 </html>

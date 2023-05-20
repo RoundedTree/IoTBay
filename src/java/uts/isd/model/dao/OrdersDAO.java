@@ -47,8 +47,27 @@ public class OrdersDAO {
         System.out.print("Order dropped!");
     }
     
+    public void submit (int orderID) throws SQLException{
+        st.executeUpdate("UPDATE ORDERS SET SUBMIT=true WHERE ORDERID=" + orderID + "");
+    }
+    
     public ArrayList<Order> fetchOrders() throws SQLException {
-    String fetch = "SELECT * FROM ORDERS";
+    String fetch = "SELECT * FROM ORDERS WHERE SUBMIT=false";
+    ResultSet rs = st.executeQuery(fetch);
+    ArrayList<Order> temp = new ArrayList();
+    
+    while (rs.next()) {
+        int id = rs.getInt(1);
+        int userId = rs.getInt(2);
+        Date date = rs.getDate(3);
+        double total = rs.getDouble(4);
+        temp.add(new Order(id, userId, date, total));
+    }
+    return temp;
+    }
+    
+    public ArrayList<Order> fetchSubmittedOrders() throws SQLException {
+    String fetch = "SELECT * FROM ORDERS WHERE SUBMIT=true";
     ResultSet rs = st.executeQuery(fetch);
     ArrayList<Order> temp = new ArrayList();
     
@@ -66,11 +85,11 @@ public class OrdersDAO {
     public ArrayList<Order> searchOrder(int orderID, String orderDate, int userID) throws SQLException{
         String fetch;
         if (orderDate == "") {
-            fetch = "SELECT * FROM ORDERS WHERE ORDERID=" + orderID + " AND USERID="+ userID +"";
+            fetch = "SELECT * FROM ORDERS WHERE ORDERID=" + orderID + " AND USERID="+ userID +" AND SUBMIT=false";
         } else if (orderID == 0) { //orderID is never 0
-            fetch = "SELECT * FROM ORDERS WHERE ORDERDATE='" + orderDate + "' AND USERID="+ userID +"";
+            fetch = "SELECT * FROM ORDERS WHERE ORDERDATE='" + orderDate + "' AND USERID="+ userID +" AND SUBMIT=false";
         } else {
-            fetch = "SELECT * FROM ORDERS WHERE ORDERDATE='" + orderDate + "' AND ORDERID="+ orderID +" AND USERID="+ userID +"";
+            fetch = "SELECT * FROM ORDERS WHERE ORDERDATE='" + orderDate + "' AND ORDERID="+ orderID +" AND USERID="+ userID +" AND SUBMIT=false";
         }
         
         ResultSet rs = st.executeQuery(fetch);

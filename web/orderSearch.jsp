@@ -17,6 +17,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
+    <jsp:include page="header.jsp" />
     <%
             ArrayList<Order> orders = (ArrayList<Order>) session.getAttribute("searchedOrders");
             User user = (User) session.getAttribute("user");
@@ -83,7 +84,6 @@
             }
             %>
             <p><a href="orderManage.jsp">Search again?</a></p>
-            <footer><a href="main.jsp">Return Home</a></footer>
             
     </body>
 </html>
