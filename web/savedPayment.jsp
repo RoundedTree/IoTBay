@@ -16,7 +16,7 @@
     </head>
     <body>
         <%
-         //bugg -- 16 digit integer is too big and jsp does not suporrt Long for cardnumber  
+         //bugg -- 16 digit integer is too big and jsp does not support Long for cardnumber  
             //Long cardNumber = Integer.parseInt(request.getParameter("cardNumber"));
          
          Integer cardNumber = Integer.parseInt(request.getParameter("cardNumber"));
@@ -28,15 +28,18 @@
          
          Payment payment = new Payment(cardNumber, cvv, cardName, expiryDate, datePaid);
          Payment pay = (Payment) session.getAttribute("payment");
+         String updated = request.getParameter("updated");
          session.setAttribute("payment", payment);
+         
          
          %>
        
-        <h1>Saved Payment Card</h1>
+         <h1>Saved Payment Card <span><%=(updated != null) ? "Update was successful":"" %></span> </h1>
         
         <div class="container" >
             <form action="updatePayment.jsp" method="post" >
                 <table  id="paymentInfo_table" >
+                    
                 <tr><td>Name:</td><td>${payment.cardName}</td></tr><br>
                 <tr><td>Card number:</td><td>${payment.cardNumber}</td></tr><br>
                 <tr><td>Expiry date:</td><td>${payment.expiryDate}</td></tr><br>
@@ -44,6 +47,8 @@
                 </table>
                 <br>
                 <input type="submit" value="Update Details">
+                <input type="hidden" name="updated" value="updated">
+                  
 
             </form>
                 <p><a class= "button" style="center" href="main.jsp">Home</a></p>
