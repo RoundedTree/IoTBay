@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="basicstyle.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Avenir">
     <%
-        String id = request.getParameter("editOrderId");
+        String id = request.getParameter("orderID");
         ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cartItems");
         if(!cart.isEmpty()) {
             System.out.print("test");
@@ -23,6 +23,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
+    <jsp:include page="header.jsp" />
     <body>
         <h1>Order #<%=id %></h1>
         <h2>Cart Details</h2>
@@ -56,7 +57,6 @@
                     <form method="post" action="RemoveItemCartController">
                          <button type="submit" name="cartID" value="<%= car.getCartID() %>" > Delete</button>
                     </form>
-                   
                 </td>
             </tr>
         <%
@@ -65,6 +65,10 @@
             }
                 %>
         </table>
+        <form method="post" action="AddItemCartController">
+            <input name="productID" placeholder="Enter product ID">
+            <button type="submit" name="orderID" value="<%= id %>" > Add to cart</button>
+        </form>
         <a href="orderManage.jsp">Back</a>
     </body>
 </html>

@@ -16,6 +16,9 @@
     <body>
         <h1 class="index-title">IoTBay</h1>
 		<div class="buttoncontainer">
+			<form action="main.jsp" method="get">
+				<button class="button" type="submit">Shop</button>
+			</form>
 			<form action="login.jsp" method="get">
 				<button class="button" type="submit">Login</button>
 			</form>

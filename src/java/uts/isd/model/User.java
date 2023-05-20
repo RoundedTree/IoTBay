@@ -10,7 +10,7 @@ package uts.isd.model;
  */
 public class User {
 	private int id;
-	private String name, email, password, phoneNumber, role;
+	private String name, email, password, role;
 
 	public User(int id, String name, String email, String password, String role) {
 		this.id = id;
@@ -50,14 +50,6 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
 	}
 
 	public String getRole() {

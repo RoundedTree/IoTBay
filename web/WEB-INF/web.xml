@@ -21,6 +21,18 @@
 		<servlet-name>RemoveOrderController</servlet-name>
 		<servlet-class>uts.isd.controller.RemoveOrderController</servlet-class>
 	</servlet>
+        <servlet>
+            <servlet-name>AddOrderController</servlet-name>
+            <servlet-class>uts.isd.controller.AddOrderController</servlet-class>
+        </servlet>
+        <servlet>
+            <servlet-name>AddItemCartController</servlet-name>
+            <servlet-class>uts.isd.controller.AddItemCartController</servlet-class>
+        </servlet>
+        <servlet>
+            <servlet-name>SubmitOrderController</servlet-name>
+            <servlet-class>uts.isd.controller.SubmitOrderController</servlet-class>
+        </servlet>
 	<servlet-mapping>
 		<servlet-name>ConnServlet</servlet-name>
 		<url-pattern>/ConnServlet</url-pattern>
@@ -57,6 +69,50 @@
 		<servlet-name>RegisterController</servlet-name>
 		<url-pattern>/RegisterController</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>LogoutController</servlet-name>
+		<servlet-class>uts.isd.controller.LogoutController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LogoutController</servlet-name>
+		<url-pattern>/LogoutController</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>AccountController</servlet-name>
+		<servlet-class>uts.isd.controller.AccountController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AccountController</servlet-name>
+		<url-pattern>/AccountController</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>UpdateAccountController</servlet-name>
+		<servlet-class>uts.isd.controller.UpdateAccountController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateAccountController</servlet-name>
+		<url-pattern>/UpdateAccountController</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>LogsController</servlet-name>
+		<servlet-class>uts.isd.controller.LogsController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LogsController</servlet-name>
+		<url-pattern>/LogsController</url-pattern>
+	</servlet-mapping>
+        <servlet-mapping>
+            <servlet-name>AddOrderController</servlet-name>
+            <url-pattern>/AddOrderController</url-pattern>
+        </servlet-mapping>
+        <servlet-mapping>
+            <servlet-name>AddItemCartController</servlet-name>
+            <url-pattern>/AddItemCartController</url-pattern>
+        </servlet-mapping>
+        <servlet-mapping>
+            <servlet-name>SubmitOrderController</servlet-name>
+            <url-pattern>/SubmitOrderController</url-pattern>
+        </servlet-mapping>
 	<session-config>
 		<session-timeout>
 			30

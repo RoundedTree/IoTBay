@@ -37,6 +37,7 @@ public class LoginController extends HttpServlet {
 
 			if (user != null) {
 				session.setAttribute("user", user);
+				manager.addUserActivity(user.getId(), "Login");
 				request.getRequestDispatcher("main.jsp").forward(request, response);
 			} else {
 				request.setAttribute("errorInfo", "Invalid email or password!");
