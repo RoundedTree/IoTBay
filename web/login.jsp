@@ -12,6 +12,7 @@
 		<link rel="stylesheet" type="text/css" href="basicstyle.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Avenir">
 	</head>
+	<jsp:include page="header.jsp" />
 	<body>
 		<div class="title">Login</div>
 		<div class="container">

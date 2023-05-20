@@ -65,6 +65,38 @@
 		<servlet-name>RegisterController</servlet-name>
 		<url-pattern>/RegisterController</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>LogoutController</servlet-name>
+		<servlet-class>uts.isd.controller.LogoutController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LogoutController</servlet-name>
+		<url-pattern>/LogoutController</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>AccountController</servlet-name>
+		<servlet-class>uts.isd.controller.AccountController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AccountController</servlet-name>
+		<url-pattern>/AccountController</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>UpdateAccountController</servlet-name>
+		<servlet-class>uts.isd.controller.UpdateAccountController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateAccountController</servlet-name>
+		<url-pattern>/UpdateAccountController</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>LogsController</servlet-name>
+		<servlet-class>uts.isd.controller.LogsController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LogsController</servlet-name>
+		<url-pattern>/LogsController</url-pattern>
+	</servlet-mapping>
         <servlet-mapping>
             <servlet-name>AddOrderController</servlet-name>
             <url-pattern>/AddOrderController</url-pattern>

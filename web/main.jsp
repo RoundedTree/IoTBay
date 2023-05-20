@@ -14,11 +14,11 @@
         <link rel="stylesheet" type="text/css" href="basicstyle.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Avenir">
     </head>
+	<jsp:include page="header.jsp" />
     <body>
         <h2>Welcome!</h2>
         <p>You're A BUTTHOLE</p>
         <br><br>
         <a href="orderManage.jsp">Order management</a>
-
     </body>
 </html>

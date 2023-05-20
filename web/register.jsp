@@ -10,7 +10,9 @@
 	<head>
 		<title>Register</title>
 		<link rel="stylesheet" type="text/css" href="basicstyle.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Avenir">
 	</head>
+	<jsp:include page="header.jsp" />
 	<body>
 		<div class="title">Register</div>
 		<form action="RegisterController" method="POST" class="container">
