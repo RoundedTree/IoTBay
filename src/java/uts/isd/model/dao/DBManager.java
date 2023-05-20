@@ -38,9 +38,10 @@ public class DBManager {
 			int id = rs.getInt(1);
 			String name = rs.getString(2);
 			String role = rs.getString(5);
-			return new User(id, name, email, password, role);
+			String accountStatus = rs.getString(6);
+			User user = new User(id, name, email, password, role, accountStatus);
+			return user;
 		}
-
 		return null;
 	}
 
@@ -88,7 +89,14 @@ public class DBManager {
 			Date date = rs.getDate("date");
 			logs.add(new UserActivityLog(id, user_id, activityType, date));
 		}
-
 		return logs;
 	}
+
+	public void cancelUserAccount(int userId) throws SQLException {
+		String sql = "UPDATE Users SET account_status = 'cancelled' WHERE id = ?";
+		PreparedStatement st = this.st.getConnection().prepareStatement(sql);
+		st.setInt(1, userId);
+		st.executeUpdate();
+	}
+
 }

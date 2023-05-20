@@ -21,18 +21,18 @@
 		<servlet-name>RemoveOrderController</servlet-name>
 		<servlet-class>uts.isd.controller.RemoveOrderController</servlet-class>
 	</servlet>
-        <servlet>
-            <servlet-name>AddOrderController</servlet-name>
-            <servlet-class>uts.isd.controller.AddOrderController</servlet-class>
-        </servlet>
-        <servlet>
-            <servlet-name>AddItemCartController</servlet-name>
-            <servlet-class>uts.isd.controller.AddItemCartController</servlet-class>
-        </servlet>
-        <servlet>
-            <servlet-name>SubmitOrderController</servlet-name>
-            <servlet-class>uts.isd.controller.SubmitOrderController</servlet-class>
-        </servlet>
+	<servlet>
+		<servlet-name>AddOrderController</servlet-name>
+		<servlet-class>uts.isd.controller.AddOrderController</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>AddItemCartController</servlet-name>
+		<servlet-class>uts.isd.controller.AddItemCartController</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>SubmitOrderController</servlet-name>
+		<servlet-class>uts.isd.controller.SubmitOrderController</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>ConnServlet</servlet-name>
 		<url-pattern>/ConnServlet</url-pattern>
@@ -101,18 +101,26 @@
 		<servlet-name>LogsController</servlet-name>
 		<url-pattern>/LogsController</url-pattern>
 	</servlet-mapping>
-        <servlet-mapping>
-            <servlet-name>AddOrderController</servlet-name>
-            <url-pattern>/AddOrderController</url-pattern>
-        </servlet-mapping>
-        <servlet-mapping>
-            <servlet-name>AddItemCartController</servlet-name>
-            <url-pattern>/AddItemCartController</url-pattern>
-        </servlet-mapping>
-        <servlet-mapping>
-            <servlet-name>SubmitOrderController</servlet-name>
-            <url-pattern>/SubmitOrderController</url-pattern>
-        </servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AddOrderController</servlet-name>
+		<url-pattern>/AddOrderController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AddItemCartController</servlet-name>
+		<url-pattern>/AddItemCartController</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SubmitOrderController</servlet-name>
+		<url-pattern>/SubmitOrderController</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>CancelAccountController</servlet-name>
+		<servlet-class>uts.isd.controller.CancelAccountController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CancelAccountController</servlet-name>
+		<url-pattern>/cancelAccount</url-pattern>
+	</servlet-mapping>
 	<session-config>
 		<session-timeout>
 			30

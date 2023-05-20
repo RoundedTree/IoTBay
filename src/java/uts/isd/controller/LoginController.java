@@ -20,7 +20,6 @@ import uts.isd.model.dao.DBManager;
  *
  * @author Pluuskie
  */
-
 public class LoginController extends HttpServlet {
 
 	@Override
@@ -36,10 +35,17 @@ public class LoginController extends HttpServlet {
 			User user = manager.findUser(email, password);
 
 			if (user != null) {
-				session.setAttribute("user", user);
-				manager.addUserActivity(user.getId(), "Login");
-				request.getRequestDispatcher("main.jsp").forward(request, response);
+				if ("cancelled".equals(user.getAccountStatus())) {
+					System.out.println("Lol");
+					request.setAttribute("errorInfo", "This account has been cancelled!");
+					request.getRequestDispatcher("login.jsp").forward(request, response);
+				} else {
+					session.setAttribute("user", user);
+					manager.addUserActivity(user.getId(), "Login");
+					request.getRequestDispatcher("main.jsp").forward(request, response);
+				}
 			} else {
+				System.out.println("Lol2");
 				request.setAttribute("errorInfo", "Invalid email or password!");
 				request.getRequestDispatcher("login.jsp").forward(request, response);
 			}
