@@ -34,6 +34,7 @@
 				<a href="main.jsp">Home</a>
 				<a href="login.jsp">Login</a>
 				<a href="register.jsp">Register</a>
+                                <a href="PaymentGuestAccountHistory.jsp">Account</a>
 				<%
 					}
 				%>

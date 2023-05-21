@@ -76,9 +76,15 @@
             <input class="input" name="productID" placeholder="Enter product ID">
             <button class="button" type="submit" name="orderID" value="<%= id %>" > Add to cart</button>
         </form>
+      
+        <form action="payment.jsp" method="get">
+            <button class="button" type="submit">Purchase Order</button>
+        </form>
+      
         <%
             }
             %>
         <p><a class="button" href="orderManage.jsp">Back</a></p>
+
     </body>
 </html>

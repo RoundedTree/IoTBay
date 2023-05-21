@@ -101,6 +101,8 @@
 		<servlet-name>LogsController</servlet-name>
 		<url-pattern>/LogsController</url-pattern>
 	</servlet-mapping>
+
+
 	<servlet-mapping>
 		<servlet-name>AddOrderController</servlet-name>
 		<url-pattern>/AddOrderController</url-pattern>
@@ -130,8 +132,23 @@
 		<url-pattern>/UserController</url-pattern>
 	</servlet-mapping>
 	<session-config>
+<!--Payment Controllers-->
+  <servlet>
+		<servlet-name>SubmitPaymentController</servlet-name>
+		<servlet-class>uts.isd.controller.SubmitPaymentController</servlet-class>
+	</servlet>
+  <servlet-mapping>
+            <servlet-name>SubmitPaymentController</servlet-name>
+            <url-pattern>/SubmitPaymentController</url-pattern>
+  </servlet-mapping>
+        
+        
+    
 		<session-timeout>
 			30
 		</session-timeout>
 	</session-config>
+        
+        
+        
 </web-app>

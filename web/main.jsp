@@ -20,5 +20,6 @@
         <p>Placeholder</p>
         <br><br>
         <a href="orderManage.jsp">Order management</a>
+        <a href="updatePayment.jsp.jsp">Order management</a>
     </body>
 </html>
