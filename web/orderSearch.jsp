@@ -42,7 +42,6 @@
             <tr>
               <th>Order ID</th>
               <th>Order Date</th>
-              <th>Order Total</th>
               <th>Edit Order</th>
             </tr>
             <%
@@ -54,7 +53,6 @@
             <tr>
               <td><%=order.getOrderID() %></td>
               <td><%=order.getOrderDate() %></td>
-              <td><%=order.getOrderTotal() %></td>
               <td class="orderEditCell">
                   <form class="orderEditForm" action="CartSearchController" method="get">
                       <button type="submit" name="orderID" value="<%= order.getOrderID()%>">View Cart</button>
