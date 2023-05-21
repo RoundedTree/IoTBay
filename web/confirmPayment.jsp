@@ -20,7 +20,7 @@
          //bugg -- 16 digit integer is too big and jsp does not support Long for cardnumber  
             //Long cardNumber = Integer.parseInt(request.getParameter("cardNumber"));
          
-         Integer cardNumber = Integer.parseInt(request.getParameter("cardNumber"));
+         String cardNumber = request.getParameter("cardNumber");
          Integer cvv = Integer.parseInt(request.getParameter("cvv"));
          String cardName = request.getParameter("cardName");
          String expiryDate = request.getParameter("expiryDate");
