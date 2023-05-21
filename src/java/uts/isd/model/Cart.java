@@ -13,11 +13,21 @@ public class Cart {
     private int cartID;
     private int orderID;
     private int productID;
+    private boolean active;
     
-    public Cart(int cartID, int orderID, int productID) {
+    public Cart(int cartID, int orderID, int productID, boolean active) {
         this.cartID = cartID;
         this.orderID = orderID;
         this.productID = productID;
+        this.active = active;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public int getCartID() {
