@@ -32,6 +32,10 @@ public class CartSearchController extends HttpServlet {
             String i = (request.getParameter("orderID"));
             id = parseInt(i);
             temp = ordersDao.fetchCart(id);
+            
+            boolean submit = ordersDao.isOrderSubmit(id);
+            
+            session.setAttribute("submit", submit);
             session.setAttribute("cartItems", temp);
             request.getRequestDispatcher("viewOrder.jsp").include(request, response);
         } catch(SQLException ex) {

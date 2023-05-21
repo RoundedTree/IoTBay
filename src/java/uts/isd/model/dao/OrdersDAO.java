@@ -68,6 +68,16 @@ public class OrdersDAO {
         st.executeUpdate("UPDATE ORDERS SET SUBMIT=true WHERE ORDERID=" + orderID + "");
     }
     
+    //Return order Submit status
+    public boolean isOrderSubmit (int orderID) throws  SQLException{
+        ResultSet rs = st.executeQuery("SELECT * FROM ORDERS WHERE ORDERID=" + orderID + "");
+        boolean submit = false;
+        while(rs.next()) {
+            submit = rs.getBoolean(4);
+            System.out.print(submit);
+        }
+        return submit;
+    } 
     
     //Fetch all saved orders
     public ArrayList<Order> fetchOrders() throws SQLException {
@@ -79,8 +89,9 @@ public class OrdersDAO {
         int id = rs.getInt(1);
         int userId = rs.getInt(2);
         Date date = rs.getDate(3);
-        double total = rs.getDouble(4);
-        temp.add(new Order(id, userId, date, total));
+        boolean submit = rs.getBoolean(4);
+        boolean active = rs.getBoolean(5);
+        temp.add(new Order(id, userId, date, submit, active));
     }
     return temp;
     }
@@ -95,8 +106,9 @@ public class OrdersDAO {
         int id = rs.getInt(1);
         int userId = rs.getInt(2);
         Date date = rs.getDate(3);
-        double total = rs.getDouble(4);
-        temp.add(new Order(id, userId, date, total));
+        boolean submit = rs.getBoolean(4);
+        boolean active = rs.getBoolean(5);
+        temp.add(new Order(id, userId, date, submit, active));
     }
     return temp;
     }
@@ -119,8 +131,9 @@ public class OrdersDAO {
         int id = rs.getInt(1);
         int userId = rs.getInt(2);
         Date date = rs.getDate(3);
-        double total = rs.getDouble(4);
-        temp.add(new Order(id, userId, date, total));
+        boolean submit = rs.getBoolean(4);
+        boolean active = rs.getBoolean(5);
+        temp.add(new Order(id, userId, date, submit, active));
     }
     return temp;
     }
@@ -135,7 +148,8 @@ public class OrdersDAO {
         int cartID = rs.getInt(1);
         int id = rs.getInt(2);
         int productID = rs.getInt(3);
-        temp.add(new Cart(cartID, id, productID));
+        boolean active = rs.getBoolean(4);
+        temp.add(new Cart(cartID, id, productID, active));
     }
     return temp;
         
@@ -152,8 +166,9 @@ public class OrdersDAO {
         int id = rs.getInt(1);
         int userId = rs.getInt(2);
         Date date = rs.getDate(3);
-        double total = rs.getDouble(4);
-        temp.add(new Order(id, userId, date, total));
+        boolean submit = rs.getBoolean(4);
+        boolean active = rs.getBoolean(5);
+        temp.add(new Order(id, userId, date, submit, active));
     }
     return temp;  
     }
