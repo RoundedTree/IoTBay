@@ -45,13 +45,14 @@ public class DBManager {
 		return null;
 	}
 
-	public void addUser(String name, String email, String password, String role) throws SQLException {
-		String query = "INSERT INTO Users (name, email, password, role) VALUES (?, ?, ?, ?)";
+	public void addUser(String name, String email, String password, String role, String accountStatus) throws SQLException {
+		String query = "INSERT INTO Users (name, email, password, role, account_status) VALUES (?, ?, ?, ?, ?)";
 		PreparedStatement st = this.st.getConnection().prepareStatement(query);
 		st.setString(1, name);
 		st.setString(2, email);
 		st.setString(3, password);
 		st.setString(4, role);
+		st.setString(5, accountStatus);
 		st.executeUpdate();
 	}
 
@@ -97,6 +98,62 @@ public class DBManager {
 		PreparedStatement st = this.st.getConnection().prepareStatement(sql);
 		st.setInt(1, userId);
 		st.executeUpdate();
+	}
+
+	public void updateUser(int id, String name, String email, String password, String role, String accountStatus) throws SQLException {
+		String query = "UPDATE Users SET name = ?, email = ?, password = ?, role = ?, account_status = ? WHERE id = ?";
+		PreparedStatement st = this.st.getConnection().prepareStatement(query);
+		st.setString(1, name);
+		st.setString(2, email);
+		st.setString(3, password);
+		st.setString(4, role);
+		st.setString(5, accountStatus);
+		st.setInt(6, id);
+		st.executeUpdate();
+	}
+
+	public void deleteUser(int id) throws SQLException {
+		String query = "DELETE FROM Users WHERE id = ?";
+		PreparedStatement st = this.st.getConnection().prepareStatement(query);
+		st.setInt(1, id);
+		st.executeUpdate();
+	}
+
+	public List<User> getAllUsers() throws SQLException {
+		String query = "SELECT * FROM Users";
+		PreparedStatement st = this.st.getConnection().prepareStatement(query);
+		ResultSet rs = st.executeQuery();
+
+		List<User> users = new ArrayList<>();
+		while (rs.next()) {
+			int id = rs.getInt(1);
+			String name = rs.getString(2);
+			String email = rs.getString(3);
+			String password = rs.getString(4);
+			String role = rs.getString(5);
+			String accountStatus = rs.getString(6);
+			users.add(new User(id, name, email, password, role, accountStatus));
+		}
+		return users;
+	}
+
+	public List<User> searchUsers(String name) throws SQLException {
+		String query = "SELECT * FROM Users WHERE name LIKE ?";
+		PreparedStatement st = this.st.getConnection().prepareStatement(query);
+		st.setString(1, "%" + name + "%");
+		ResultSet rs = st.executeQuery();
+
+		List<User> users = new ArrayList<>();
+		while (rs.next()) {
+			int id = rs.getInt(1);
+			String userName = rs.getString(2);
+			String email = rs.getString(3);
+			String password = rs.getString(4);
+			String role = rs.getString(5);
+			String accountStatus = rs.getString(6);
+			users.add(new User(id, userName, email, password, role, accountStatus));
+		}
+		return users;
 	}
 
 }

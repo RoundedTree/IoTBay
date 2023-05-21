@@ -19,4 +19,5 @@ CREATE TABLE Users (
 INSERT INTO Users (name, email, password, role) VALUES 
 ('John Doe', 'john.doe@example.com', 'johnpassword', 'customer'),
 ('Jane Smith', 'jane.smith@example.com', 'janepassword', 'customer'),
-('Admin User', 'admin@example.com', 'adminpassword', 'staff');
+('Bob Jones', 'bob.jones@example.com', 'bobpassword', 'staff'),
+('Admin User', 'admin@example.com', 'adminpassword', 'admin');

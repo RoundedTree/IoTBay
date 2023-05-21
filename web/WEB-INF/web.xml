@@ -121,6 +121,14 @@
 		<servlet-name>CancelAccountController</servlet-name>
 		<url-pattern>/cancelAccount</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>UserController</servlet-name>
+		<servlet-class>uts.isd.controller.UserController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserController</servlet-name>
+		<url-pattern>/UserController</url-pattern>
+	</servlet-mapping>
 	<session-config>
 		<session-timeout>
 			30

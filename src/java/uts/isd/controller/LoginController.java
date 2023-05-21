@@ -36,7 +36,6 @@ public class LoginController extends HttpServlet {
 
 			if (user != null) {
 				if ("cancelled".equals(user.getAccountStatus())) {
-					System.out.println("Lol");
 					request.setAttribute("errorInfo", "This account has been cancelled!");
 					request.getRequestDispatcher("login.jsp").forward(request, response);
 				} else {
@@ -45,7 +44,6 @@ public class LoginController extends HttpServlet {
 					request.getRequestDispatcher("main.jsp").forward(request, response);
 				}
 			} else {
-				System.out.println("Lol2");
 				request.setAttribute("errorInfo", "Invalid email or password!");
 				request.getRequestDispatcher("login.jsp").forward(request, response);
 			}
