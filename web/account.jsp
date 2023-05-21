@@ -19,7 +19,7 @@
         <div class="container">
             <h2>Account Details</h2>
 			<%
-			User user = (User) session.getAttribute("user");
+				User user = (User) session.getAttribute("user");
 			%>
 			<p>Current Name: <%=user.getName()%></p>
 			<p>Current Email: <%=user.getEmail()%></p>
@@ -33,6 +33,9 @@
 				<input type="submit" value="Update Account" />
 			</form>
 			<a href="LogsController" class="button">View Logs</a>
+			<form action="cancelAccount" method="post">
+				<input type="submit" value="Cancel Account" class="button"/>
+			</form>
         </div>
     </body>
 </html>

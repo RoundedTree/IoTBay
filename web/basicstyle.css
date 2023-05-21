@@ -4,7 +4,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 */
 /* 
     Created on : 29 Mar 2023, 9:38:11 am
-    Author     : Pluuskie
+    Author     : Thomas
 */
 html, body {
     overflow-x: hidden;
@@ -51,17 +51,28 @@ body {
 	border: none;
 	border-radius: 5px;
 	margin: 10px;
-	background-color: green;
+	background-color: #4CAF50;
 	cursor: pointer;
 	width: auto;
 }
 
 .button:hover {
-	background-color: lightgrey;
+	background-color: lightgreen;
 }
 
 .button:active {
-	background-color: darkgray;
+	background-color: darkgreen;
+}
+
+.input {
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.td > form > button,
+.orderEditCell > form > button {
+    padding: 2px 10px !important;
+    margin: 2px !important;
 }
 
 .container {
@@ -203,6 +214,63 @@ body {
 .styled-table tbody tr.active-row {
     font-weight: bold;
     color: #5e5e5e;
+}
+
+.container-admin {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 50px;
+}
+
+.container-admin label {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.container-admin input[type="text"],
+.container-admin input[type="password"],
+.container-admin input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.container-admin input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: auto;
+}
+
+.container-admin select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.form-admin {
+    width: 100%;
+}
+
+.styled-table-admin {
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.styled-table-admin .form-field {
+    flex: 1 1 200px;
+    padding: 5px;
 }
 
 

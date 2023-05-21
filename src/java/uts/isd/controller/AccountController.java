@@ -13,10 +13,10 @@ import uts.isd.model.User;
 
 /**
  *
- * @author Pluuskie
+ * @author Thomas
  */
 public class AccountController extends HttpServlet {
-
+	// This just sets the attributes when the AccountController is called by the button on the header.
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		User user = (User) req.getSession().getAttribute("user");

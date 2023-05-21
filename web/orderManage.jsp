@@ -55,7 +55,6 @@
             <tr>
               <th>Order ID</th>
               <th>Order Date</th>
-              <th>Order Total</th>
               <th>Edit Order</th>
             </tr>
             <%
@@ -65,18 +64,17 @@
             <tr>
               <td><%=order.getOrderID() %></td>
               <td><%=order.getOrderDate() %></td>
-              <td><%=order.getOrderTotal() %></td>
               <td class="orderEditCell">
                   <form class="orderEditForm" action="CartSearchController" method="get">
-                      <button type="submit" name="orderID" value="<%= order.getOrderID()%>">View Cart</button>
+                      <button class="button" type="submit" name="orderID" value="<%= order.getOrderID()%>">View Cart</button>
                   </form>
                   <form class="orderEditForm"action="RemoveOrderController" method="post">
-                      <button type="submit" name="orderID" value="<%= order.getOrderID()%>">Delete Order</button>
+                      <button class="button" type="submit" name="orderID" value="<%= order.getOrderID()%>">Delete Order</button>
                   </form>
               </td>
-              <td>
+              <td class="td">
                   <form method="post" action="SubmitOrderController" >
-                      <button  type="submit" name="orderID" value="<%= order.getOrderID()%>" >Submit order</button>
+                      <button class="button"  type="submit" name="orderID" value="<%= order.getOrderID()%>" >Submit order</button>
                   </form>
               </td>
             </tr>
@@ -86,7 +84,7 @@
                 %>
         </table>
         <form action="AddOrderController" method="post">
-            <button type="submit" name="userID" value="<%=userID%>">Create Order</button>
+            <button class="button" type="submit" name="userID" value="<%=userID%>">Create Order</button>
         </form>
                 <%
                     }
@@ -95,10 +93,10 @@
         <h3>Search</h3>
         <form method="get" action="OrderSearchController">
             <label>Order Id</label>
-            <input name="searchID" placeholder="Order ID">
+            <input class="input" name="searchID" placeholder="Order ID">
             <label>Order Date</label>
-            <input name="searchDate" placeholder="mm/dd/yyyy">
-            <button type="submit" name="userID" value=<%= userID %>>Search</button>
+            <input class="input" name="searchDate" placeholder="mm/dd/yyyy">
+            <button class="button" type="submit" name="userID" value=<%= userID %>>Search</button>
         </form>
         
         <h3>Placed Orders</h3>
@@ -107,7 +105,7 @@
             <tr>
               <th>Order ID</th>
               <th>Order Date</th>
-              <th>Order Total</th>
+              <th>View Details</th>
             </tr>
         <%
                 for (Order order : submittedOrders) {
@@ -116,8 +114,11 @@
             <tr>
               <td><%=order.getOrderID() %></td>
               <td><%=order.getOrderDate() %></td>
-              <td><%=order.getOrderTotal() %></td>
-              
+              <td class="orderEditCell">
+                  <form class="orderEditForm" action="CartSearchController" method="get">
+                      <button class="button" type="submit" name="orderID" value="<%= order.getOrderID()%>">View Cart</button>
+                  </form>
+              </td>
             </tr>
             <%
                     }

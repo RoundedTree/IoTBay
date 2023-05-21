@@ -27,7 +27,13 @@ public class DBManager {
 	public DBManager(Connection conn) throws SQLException {
 		st = conn.createStatement();
 	}
-
+	
+	/* 
+	The following function takes in an email and password string and queries the database to see if there's any
+	user with the email and password given. If there was, it returns that user, otherwise it returns null. This is
+	used for validation.
+	*/
+	
 	public User findUser(String email, String password) throws SQLException {
 		String query = "SELECT * FROM Users WHERE email = ? AND password = ?";
 		PreparedStatement st = this.st.getConnection().prepareStatement(query);
@@ -39,22 +45,31 @@ public class DBManager {
 			int id = rs.getInt(1);
 			String name = rs.getString(2);
 			String role = rs.getString(5);
-			return new User(id, name, email, password, role);
+			String accountStatus = rs.getString(6);
+			User user = new User(id, name, email, password, role, accountStatus);
+			return user;
 		}
-
 		return null;
 	}
-
-	public void addUser(String name, String email, String password, String role) throws SQLException {
-		String query = "INSERT INTO Users (name, email, password, role) VALUES (?, ?, ?, ?)";
+	
+	/*
+	The following function takes in all of the User constructor variables and creates a new user in the database.
+	*/
+	public void addUser(String name, String email, String password, String role, String accountStatus) throws SQLException {
+		String query = "INSERT INTO Users (name, email, password, role, account_status) VALUES (?, ?, ?, ?, ?)";
 		PreparedStatement st = this.st.getConnection().prepareStatement(query);
 		st.setString(1, name);
 		st.setString(2, email);
 		st.setString(3, password);
 		st.setString(4, role);
+		st.setString(5, accountStatus);
 		st.executeUpdate();
 	}
-
+	
+	/*
+	The following function creates a new user activity log and inserts it into the activity log database based on
+	the paramters given.
+	*/
 	public void addUserActivity(int userId, String activityType) throws SQLException {
 		String sql = "INSERT INTO UserActivityLog(user_id, activity_type) VALUES (?, ?)";
 		PreparedStatement st = this.st.getConnection().prepareStatement(sql);
@@ -62,7 +77,10 @@ public class DBManager {
 		st.setString(2, activityType);
 		st.executeUpdate();
 	}
-
+	
+	/*
+	The following function updates the specified user in the database with new values.
+	*/
 	public void updateUser(User user) throws SQLException {
 		String query = "UPDATE Users SET name = ?, email = ?, password = ? WHERE id = ?";
 		PreparedStatement st = this.st.getConnection().prepareStatement(query);
@@ -72,8 +90,11 @@ public class DBManager {
 		st.setInt(4, user.getId());
 		st.executeUpdate();
 	}
-
-	public List<UserActivityLog> getUserActivityLogs(int userId, Date startDate, Date endDate) throws SQLException { // Change here
+	
+	/*
+	The following function returns a list of activity logs based on the userId, startDate and endDate.
+	*/
+	public List<UserActivityLog> getUserActivityLogs(int userId, Date startDate, Date endDate) throws SQLException {
 		String sql = "SELECT * FROM UserActivityLog WHERE user_id = ? AND date BETWEEN ? AND ?";
 		PreparedStatement st = this.st.getConnection().prepareStatement(sql);
 		st.setInt(1, userId);
@@ -89,11 +110,92 @@ public class DBManager {
 			Date date = rs.getDate("date");
 			logs.add(new UserActivityLog(id, user_id, activityType, date));
 		}
-
 		return logs;
 	}
-        
-        
+   
+       
+	
+	/*
+	The following function sets the user's account_status to 'cancelled'.
+	*/
+	public void cancelUserAccount(int userId) throws SQLException {
+		String sql = "UPDATE Users SET account_status = 'cancelled' WHERE id = ?";
+		PreparedStatement st = this.st.getConnection().prepareStatement(sql);
+		st.setInt(1, userId);
+		st.executeUpdate();
+	}
+	
+	/*
+	The following function updates the user differently, where it takes all of the values directly as parameters.
+	*/
+	public void updateUser(int id, String name, String email, String password, String role, String accountStatus) throws SQLException {
+		String query = "UPDATE Users SET name = ?, email = ?, password = ?, role = ?, account_status = ? WHERE id = ?";
+		PreparedStatement st = this.st.getConnection().prepareStatement(query);
+		st.setString(1, name);
+		st.setString(2, email);
+		st.setString(3, password);
+		st.setString(4, role);
+		st.setString(5, accountStatus);
+		st.setInt(6, id);
+		st.executeUpdate();
+	}
+	
+	/*
+	The following function deletes a user from the database.
+	*/
+	public void deleteUser(int id) throws SQLException {
+		String query = "DELETE FROM Users WHERE id = ?";
+		PreparedStatement st = this.st.getConnection().prepareStatement(query);
+		st.setInt(1, id);
+		st.executeUpdate();
+	}
+	
+	/*
+	The following functions returns a list of all users in the users database.
+	*/
+	public List<User> getAllUsers() throws SQLException {
+		String query = "SELECT * FROM Users";
+		PreparedStatement st = this.st.getConnection().prepareStatement(query);
+		ResultSet rs = st.executeQuery();
+
+		List<User> users = new ArrayList<>();
+		while (rs.next()) {
+			int id = rs.getInt(1);
+			String name = rs.getString(2);
+			String email = rs.getString(3);
+			String password = rs.getString(4);
+			String role = rs.getString(5);
+			String accountStatus = rs.getString(6);
+			users.add(new User(id, name, email, password, role, accountStatus));
+		}
+		return users;
+	}
+	
+	/*
+	The following function returns a list of users with the specified name.
+	*/
+	public List<User> searchUsers(String name) throws SQLException {
+		String query = "SELECT * FROM Users WHERE name LIKE ?";
+		PreparedStatement st = this.st.getConnection().prepareStatement(query);
+		st.setString(1, "%" + name + "%");
+		ResultSet rs = st.executeQuery();
+
+		List<User> users = new ArrayList<>();
+		while (rs.next()) {
+			int id = rs.getInt(1);
+			String userName = rs.getString(2);
+			String email = rs.getString(3);
+			String password = rs.getString(4);
+			String role = rs.getString(5);
+			String accountStatus = rs.getString(6);
+			users.add(new User(id, userName, email, password, role, accountStatus));
+		}
+		return users;
+	}
+
+
+  
+          
 //======================================= CRUD OPERATIONS FOR PAYMENT MANAGEMENT SECTION  ================================================================//
        
         //get paymentId -- used in payment.java
@@ -146,7 +248,8 @@ public class DBManager {
                 st.setString(7, datePaid);
                 st.executeUpdate();
         }
-        
+  
+     
         //Update user payment info into database 
         public void updatePayment(Integer paymentId, String paymentMethod, String cardNumber,
             Integer cvv, String cardName, String expiryDate, String datePaid) throws SQLException {
@@ -172,6 +275,5 @@ public class DBManager {
         }       
         
         //Display list of payments for user -- used in paymentHistory.jsp
-        
-        
+  
 }

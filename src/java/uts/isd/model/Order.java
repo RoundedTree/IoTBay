@@ -13,13 +13,32 @@ public class Order {
     private int orderID;
     private int userID;
     private Date orderDate;
-    private double orderTotal;
+    private boolean submit;
+    boolean active;
     
-    public Order(int orderID, int userID, Date orderDate, double orderTotal) {
+    
+    public Order(int orderID, int userID, Date orderDate, boolean submit, boolean active) {
         this.orderID = orderID;
         this.userID = userID;
         this.orderDate = orderDate;
-        this.orderTotal = orderTotal;
+        this.submit = submit;
+        this.active = active;
+    }
+
+    public boolean isSubmit() {
+        return submit;
+    }
+
+    public void setSubmit(boolean submit) {
+        this.submit = submit;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public int getOrderID() {
@@ -46,12 +65,5 @@ public class Order {
         this.orderDate = orderDate;
     }
 
-    public double getOrderTotal() {
-        return orderTotal;
-    }
-
-    public void setOrderTotal(double orderTotal) {
-        this.orderTotal = orderTotal;
-    }
 	
 }

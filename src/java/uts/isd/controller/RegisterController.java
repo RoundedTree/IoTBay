@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package uts.isd.controller;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -16,30 +17,31 @@ import uts.isd.model.dao.DBManager;
 
 /**
  *
- * @author Pluuskie
+ * @author Thomas
  */
-
 public class RegisterController extends HttpServlet {
+	@Override
+	// This creates a new user based on what the user types into the registration form.
+	// It's possible to enter anything into email because there's nothing to validate it.
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		DBManager manager = (DBManager) session.getAttribute("manager");
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        DBManager manager = (DBManager) session.getAttribute("manager");
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		String role = "customer";
+		String accountStatus = "active";
 
-        String name = request.getParameter("name");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String role = "customer";
+		try {
+			manager.addUser(name, email, password, role, accountStatus);
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 
-        try {
-            manager.addUser(name, email, password, role);
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
-            request.setAttribute("errorInfo", "Error during registration. Please try again.");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
-        }
-    }
+		} catch (SQLException ex) {
+			Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
+			request.setAttribute("errorInfo", "Error during registration. Please try again.");
+			request.getRequestDispatcher("register.jsp").forward(request, response);
+		}
+	}
 }

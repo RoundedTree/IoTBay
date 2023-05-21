@@ -18,9 +18,8 @@ import uts.isd.model.dao.DBManager;
 
 /**
  *
- * @author Pluuskie
+ * @author Thomas
  */
-
 public class LoginController extends HttpServlet {
 
 	@Override
@@ -31,14 +30,20 @@ public class LoginController extends HttpServlet {
 
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-
+		// This just validates the user based on their email and password using data from the database.
+		// And logs them in if it's correct and doesn't otherwise, and provides an error message.
 		try {
 			User user = manager.findUser(email, password);
 
 			if (user != null) {
-				session.setAttribute("user", user);
-				manager.addUserActivity(user.getId(), "Login");
-				request.getRequestDispatcher("main.jsp").forward(request, response);
+				if ("cancelled".equals(user.getAccountStatus())) {
+					request.setAttribute("errorInfo", "This account has been cancelled!");
+					request.getRequestDispatcher("login.jsp").forward(request, response);
+				} else {
+					session.setAttribute("user", user);
+					manager.addUserActivity(user.getId(), "Login");
+					request.getRequestDispatcher("main.jsp").forward(request, response);
+				}
 			} else {
 				request.setAttribute("errorInfo", "Invalid email or password!");
 				request.getRequestDispatcher("login.jsp").forward(request, response);

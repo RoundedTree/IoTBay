@@ -24,21 +24,25 @@ public class OrdersDAO {
         st = conn.createStatement(); 
     }
     
+    //Adds order
     public void addOrder(int userID, String date) throws SQLException{
-        String query = "INSERT INTO ORDERS (USERID, ORDERDATE, ORDERPRICE) VALUES (" + userID + ", '" + date + "', 0)";
+        String query = "INSERT INTO ORDERS (USERID, ORDERDATE) VALUES (" + userID + ", '" + date + "')";
         st.executeUpdate(query);
     }
     
+    //Adds item into orders cart
     public void addCartItem(int orderID, int productID) throws SQLException{
         String query = "INSERT INTO CART (ORDERID, PRODUCTID) VALUES ("+ orderID +", "+ productID+")";
         st.executeUpdate(query);
     }
     
+    //Remove item from orders cart
     public void removeItem(int cartID) throws SQLException{       
         st.executeUpdate("DELETE FROM CART WHERE CARTID=" + cartID + "");
         System.out.print("Item removed from cart!!!");
     }
     
+    //Adds deletes all items from cart then deletes order
     public void removeOrder(int orderID) throws SQLException{
         st.executeUpdate("DELETE FROM CART WHERE ORDERID=" + orderID + "");
         System.out.print("Carts dropped!");
@@ -47,10 +51,35 @@ public class OrdersDAO {
         System.out.print("Order dropped!");
     }
     
+    //Cancel order
+    public void handleCancelOrder(int userID) throws SQLException{
+        String sql = "UPDATE ORDERS SET ACTIVE=FALSE WHERE USERID= "+ userID +"";
+        st.executeUpdate(sql);
+    }
+    
+    //Cancel Cart
+    public void handleCancelCart(int cartID) throws SQLException{
+        String sql = "UPDATE CART SET ACTIVE=FALSE WHERE ORDERID= "+ cartID +"";
+        st.executeUpdate(sql);
+    }
+    
+    //Submit order
     public void submit (int orderID) throws SQLException{
         st.executeUpdate("UPDATE ORDERS SET SUBMIT=true WHERE ORDERID=" + orderID + "");
     }
     
+    //Return order Submit status
+    public boolean isOrderSubmit (int orderID) throws  SQLException{
+        ResultSet rs = st.executeQuery("SELECT * FROM ORDERS WHERE ORDERID=" + orderID + "");
+        boolean submit = false;
+        while(rs.next()) {
+            submit = rs.getBoolean(4);
+            System.out.print(submit);
+        }
+        return submit;
+    } 
+    
+    //Fetch all saved orders
     public ArrayList<Order> fetchOrders() throws SQLException {
     String fetch = "SELECT * FROM ORDERS WHERE SUBMIT=false";
     ResultSet rs = st.executeQuery(fetch);
@@ -60,12 +89,14 @@ public class OrdersDAO {
         int id = rs.getInt(1);
         int userId = rs.getInt(2);
         Date date = rs.getDate(3);
-        double total = rs.getDouble(4);
-        temp.add(new Order(id, userId, date, total));
+        boolean submit = rs.getBoolean(4);
+        boolean active = rs.getBoolean(5);
+        temp.add(new Order(id, userId, date, submit, active));
     }
     return temp;
     }
     
+    //Fetch all submitted orders
     public ArrayList<Order> fetchSubmittedOrders() throws SQLException {
     String fetch = "SELECT * FROM ORDERS WHERE SUBMIT=true";
     ResultSet rs = st.executeQuery(fetch);
@@ -75,13 +106,14 @@ public class OrdersDAO {
         int id = rs.getInt(1);
         int userId = rs.getInt(2);
         Date date = rs.getDate(3);
-        double total = rs.getDouble(4);
-        temp.add(new Order(id, userId, date, total));
+        boolean submit = rs.getBoolean(4);
+        boolean active = rs.getBoolean(5);
+        temp.add(new Order(id, userId, date, submit, active));
     }
     return temp;
     }
     
-    
+    //Search order by orderID and/or orderDate
     public ArrayList<Order> searchOrder(int orderID, String orderDate, int userID) throws SQLException{
         String fetch;
         if (orderDate == "") {
@@ -99,14 +131,16 @@ public class OrdersDAO {
         int id = rs.getInt(1);
         int userId = rs.getInt(2);
         Date date = rs.getDate(3);
-        double total = rs.getDouble(4);
-        temp.add(new Order(id, userId, date, total));
+        boolean submit = rs.getBoolean(4);
+        boolean active = rs.getBoolean(5);
+        temp.add(new Order(id, userId, date, submit, active));
     }
     return temp;
     }
     
+    //Find cart of order
     public ArrayList<Cart> fetchCart(int orderID) throws SQLException {
-        String fetch = "SELECT * FROM CART WHERE ORDERID=" + orderID + " ";
+        String fetch = "SELECT * FROM CART WHERE ORDERID=" + orderID + "";
         System.out.print(fetch);
         ResultSet rs = st.executeQuery(fetch);
         ArrayList<Cart> temp = new ArrayList();
@@ -114,10 +148,31 @@ public class OrdersDAO {
         int cartID = rs.getInt(1);
         int id = rs.getInt(2);
         int productID = rs.getInt(3);
-        temp.add(new Cart(cartID, id, productID));
+        boolean active = rs.getBoolean(4);
+        temp.add(new Cart(cartID, id, productID, active));
     }
     return temp;
         
     }
     
+    //Returns list of orders by userID
+    public ArrayList<Order> fetchOrdersByUserID(int userID) throws SQLException {
+        String fetch = "SELECT * FROM ORDERS WHERE USERID=" + userID + "";
+        System.out.print(fetch);
+        ResultSet rs = st.executeQuery(fetch);
+        ArrayList<Order> temp = new ArrayList();
+    
+    while (rs.next()) {
+        int id = rs.getInt(1);
+        int userId = rs.getInt(2);
+        Date date = rs.getDate(3);
+        boolean submit = rs.getBoolean(4);
+        boolean active = rs.getBoolean(5);
+        temp.add(new Order(id, userId, date, submit, active));
+    }
+    return temp;  
+    }
+    
 }
+
+

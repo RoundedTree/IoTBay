@@ -14,9 +14,7 @@
     <%
         String id = request.getParameter("orderID");
         ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cartItems");
-        if(!cart.isEmpty()) {
-            System.out.print("test");
-        }
+        System.out.print(session.getAttribute("submit"));
         
         %>
     <head>
@@ -53,11 +51,17 @@
                 <td><%=car.getCartID() %></td>
                 <td><%=car.getOrderID() %></td>
                 <td><%=car.getProductID() %></td>
-                <td>
+                <%
+                    if (Boolean.FALSE == session.getAttribute("submit")) {
+                    %>
+                <td class="td">
                     <form method="post" action="RemoveItemCartController">
-                         <button type="submit" name="cartID" value="<%= car.getCartID() %>" > Delete</button>
+                         <button class="button" type="submit" name="cartID" value="<%= car.getCartID() %>" > Delete</button>
                     </form>
                 </td>
+                <%
+                    }
+                    %>
             </tr>
         <%
                     }
@@ -65,15 +69,22 @@
             }
                 %>
         </table>
+        <%
+           if (Boolean.FALSE == session.getAttribute("submit")) {
+            %>
         <form method="post" action="AddItemCartController">
-            <input name="productID" placeholder="Enter product ID">
-            <button type="submit" name="orderID" value="<%= id %>" > Add to cart</button>
+            <input class="input" name="productID" placeholder="Enter product ID">
+            <button class="button" type="submit" name="orderID" value="<%= id %>" > Add to cart</button>
         </form>
-        
+      
         <form action="payment.jsp" method="get">
             <button class="button" type="submit">Purchase Order</button>
         </form>
-        
-        <a href="orderManage.jsp">Back</a>
+      
+        <%
+            }
+            %>
+        <p><a class="button" href="orderManage.jsp">Back</a></p>
+
     </body>
 </html>

@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Pluuskie
+ * @author Thomas
  */
 
 public class UpdateAccountController extends HttpServlet {
