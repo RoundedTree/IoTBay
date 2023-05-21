@@ -33,6 +33,8 @@
 				<input type="submit" value="Update Account" />
 			</form>
 			<a href="LogsController" class="button">View Logs</a>
+			<a href="orderManage.jsp" class="button">Order Management</a>
+			<a href="updatePayment.jsp" class="button">Update Payment</a>
 			<form action="cancelAccount" method="post">
 				<input type="submit" value="Cancel Account" class="button" style="background-color: red"/>
 			</form>
