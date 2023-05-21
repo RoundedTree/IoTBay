@@ -14,3 +14,25 @@ CREATE TABLE UserActivityLog (
     date DATE DEFAULT CURRENT_DATE
 );
 
+INSERT INTO UserActivityLog (user_id, activity_type, date) VALUES
+(1, "Login", 2023-05-20),
+(1, "Logout", 2023-05-20),
+(2, "Login", 2023-05-20),
+(2, "Logout", 2023-05-20),
+(3, "Login", 2023-05-20),
+(3, "Logout", 2023-05-20),
+(4, "Login", 2023-05-20),
+(4, "Logout", 2023-05-20),
+(5, "Login", 2023-05-20),
+(5, "Logout", 2023-05-20),
+(6, "Login", 2023-05-20),
+(6, "Logout", 2023-05-20),
+(7, "Login", 2023-05-20),
+(7, "Logout", 2023-05-20),
+(8, "Login", 2023-05-20),
+(8, "Logout", 2023-05-20),
+(9, "Login", 2023-05-20),
+(9, "Logout", 2023-05-20),
+(10, "Login", 2023-05-20),
+(10, "Logout", 2023-05-20);
+
