@@ -34,7 +34,7 @@
 			</form>
 			<a href="LogsController" class="button">View Logs</a>
 			<form action="cancelAccount" method="post">
-				<input type="submit" value="Cancel Account" class="button"/>
+				<input type="submit" value="Cancel Account" class="button" style="background-color: red"/>
 			</form>
         </div>
     </body>
