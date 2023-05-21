@@ -16,7 +16,7 @@ import uts.isd.model.dao.DBManager;
 
 /**
  *
- * @author Pluuskie
+ * @author Thomas
  */
 public class CancelAccountController extends HttpServlet {
 

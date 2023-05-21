@@ -8,7 +8,7 @@ import java.sql.Date;
 
 /**
  *
- * @author Pluuskie
+ * @author Thomas
  */
 
 public class UserActivityLog {

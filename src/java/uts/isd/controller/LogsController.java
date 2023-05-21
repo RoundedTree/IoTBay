@@ -20,7 +20,7 @@ import java.time.LocalDate;
 
 /**
  *
- * @author Pluuskie
+ * @author Thomas
  */
 public class LogsController extends HttpServlet {
 

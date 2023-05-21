@@ -13,7 +13,7 @@ import uts.isd.model.User;
 
 /**
  *
- * @author Pluuskie
+ * @author Thomas
  */
 public class AccountController extends HttpServlet {
 

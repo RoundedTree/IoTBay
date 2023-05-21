@@ -6,7 +6,7 @@ package uts.isd.model;
 
 /**
  *
- * @author Pluuskie
+ * @author Thomas
  */
 public class User {
 	private int id;
