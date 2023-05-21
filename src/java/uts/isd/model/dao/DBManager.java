@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package uts.isd.model.dao;
+import uts.isd.model.Payment;
 
 /**
  *
@@ -91,4 +92,86 @@ public class DBManager {
 
 		return logs;
 	}
+        
+        
+//======================================= CRUD OPERATIONS FOR PAYMENT MANAGEMENT SECTION  ================================================================//
+       
+        //get paymentId -- used in payment.java
+        public int getPaymentId() throws SQLException {
+            int paymentId;
+            String fetch = "SELECT MAX(PAYMENTID) FROM Payments" ;
+            ResultSet rs = st.executeQuery(fetch);
+            if (rs.next()) {
+                 paymentId = rs.getInt(1);
+                 return paymentId;
+            } else {
+                return 0;
+            }
+        }
+        
+        //Search for paymentId in database
+            //Add orderID later
+        public Payment searchPaymentId(Integer paymentId) throws SQLException {
+            String query = "SELECT * FROM Payments WHERE payment_id = ?";
+            PreparedStatement st = this.st.getConnection().prepareStatement(query);
+            st.setInt(1, paymentId);
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                //Integer orderId = rs.getInt(2);
+                String paymentMethod = rs.getString(3);
+                String cardNumber = rs.getString(4);
+                String cardName = rs.getString(5);
+                String expiryDate = rs.getString(6);
+                Integer cvv = rs.getInt(7);
+                String datePaid = rs.getString(8);
+                return new Payment(paymentMethod, cardNumber, cvv, cardName, expiryDate, datePaid);
+            }
+
+            return null;
+        }
+        
+        
+        //Add user payment info into database
+            //Add orderID later
+        public void addPayment(String paymentMethod, String cardNumber, Integer cvv, String cardName, String expiryDate, String datePaid) throws SQLException {
+                String query = "INSERT INTO Payments (payment_id, order_id, payment_method, card_number, cvv, card_name, expiry_date, date_paid) VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?)";
+                PreparedStatement st = this.st.getConnection().prepareStatement(query);
+                //st.setInt(1, OrderId);
+                st.setString(2, paymentMethod);
+                st.setString(3, cardNumber);
+                st.setString(4, cardName);
+                st.setString(5, expiryDate);
+                st.setInt(6, cvv);
+                st.setString(7, datePaid);
+                st.executeUpdate();
+        }
+        
+        //Update user payment info into database 
+        public void updatePayment(Integer paymentId, String paymentMethod, String cardNumber,
+            Integer cvv, String cardName, String expiryDate, String datePaid) throws SQLException {
+            String query = "UPDATE Payments SET paymentmethod=?, card_number=?, cvv=?, card_name=?, expiry_date=?, date_paid=? WHERE paymentId=?";
+            PreparedStatement st = this.st.getConnection().prepareStatement(query);
+            st.setString(1, paymentMethod);
+            st.setString(2, cardNumber);
+            st.setString(3, cardName);
+            st.setString(4, expiryDate);
+            st.setInt(5, cvv);
+            st.setString(6, datePaid);
+            st.setInt(7, paymentId);
+            st.executeUpdate();
+        }
+
+        
+        //Delete payment from database
+        public void deletePayment(int paymentId) throws SQLException {
+                String query = "DELETE FROM Payments WHERE payment_id = ?";
+                PreparedStatement st = this.st.getConnection().prepareStatement(query);
+                st.setInt(1, paymentId);
+                st.executeUpdate();
+        }       
+        
+        //Display list of payments for user -- used in paymentHistory.jsp
+        
+        
 }

@@ -78,7 +78,7 @@ body {
 }
 
 .container input[type="text"],
-.container input[type="password"] {
+.container input[type="password"]{
 	width: 100%;
 	padding: 10px;
 	margin-bottom: 20px;
@@ -204,3 +204,5 @@ body {
     font-weight: bold;
     color: #5e5e5e;
 }
+
+

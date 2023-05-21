@@ -13,9 +13,10 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Avenir">
         <title>Update Payment Page</title>
     </head>
+    <jsp:include page="header.jsp" />
     <body>
         <h1>Payment Details</h1> 
-        <p> gimie ur money no scam ahead </p>
+        <p> Don't worry no scams ahead :) </p>
         <!-- Card payment table -->
        <div class="container"> 
            <form action="savedPayment.jsp" method="post" >
@@ -33,8 +34,6 @@
             </form>
            <br>
            <br>
-           
-           <input type="submit" value="Pay now"><br>
          
            <a href="main.jsp">Cancel</a>
          

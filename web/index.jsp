@@ -19,7 +19,10 @@
 			<form action="main.jsp" method="get">
 				<button class="button" type="submit">Shop</button>
 			</form>
-			<form action="login.jsp" method="get">
+			<form action="PaymentGuestAccountHistory.jsp" method="get">
+				<button class="button" type="submit">Account</button>
+			</form>
+                        <form action="login.jsp" method="get">
 				<button class="button" type="submit">Login</button>
 			</form>
 			<form action="register.jsp" method="get">

@@ -11,41 +11,43 @@ import java.io.Serializable;
  * @author angelaliang
  */
 public class Payment implements Serializable{
-    //private String paymentMethod;
-    private Integer cardNumber;
-    private Integer cvv;
+    private String paymentMethod;
+    private String cardNumber;
+    private int cvv;
     private String cardName;
     private String expiryDate;
-    
+   
     private String datePaid;
     
     // constructor initialies the fields
-    public Payment(Integer cardNumber, Integer cvv, String cardName, String expiryDate,  String datePaid) {
+    public Payment(String cardName, String cardNumber, Integer cvv, String expiryDate, String datePaid, String paymentMethod) {
         //this.paymentMethod = paymentMethod;
         this.cardNumber = cardNumber;
         this.cvv = cvv;
         this.cardName = cardName;
         this.expiryDate = expiryDate;
         this.datePaid = datePaid;
+        this.paymentMethod = paymentMethod;
     }
     
+  //getters and setters for Payment Management  
     
     public Payment() {}
     
-    /*
+    
     public String getPaymentMethod() {
         return paymentMethod;
     }
     public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
-    */
+   
     
     
-    public Integer getCardNumber() {
+    public String getCardNumber() {
         return cardNumber;
     }
-    public void setCardNumber(Integer cardNumber) {
+    public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
     }
     
@@ -66,10 +68,10 @@ public class Payment implements Serializable{
     }
     
     
-     public Integer getCvv() {
+     public int getCvv() {
         return cvv;
     }
-    public void setCvv(Integer cvv) {
+    public void setCvv(int cvv) {
         this.cvv = cvv;
     }
     

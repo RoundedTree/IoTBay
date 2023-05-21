@@ -20,7 +20,7 @@
          //bugg -- 16 digit integer is too big and jsp does not support Long for cardnumber  
             //Long cardNumber = Integer.parseInt(request.getParameter("cardNumber"));
          
-         String cardNumber = request.getParameter(request.getParameter("cardNumber"));
+         Integer cardNumber = Integer.parseInt(request.getParameter("cardNumber"));
          Integer cvv = Integer.parseInt(request.getParameter("cvv"));
          String cardName = request.getParameter("cardName");
          String expiryDate = request.getParameter("expiryDate");
@@ -29,7 +29,7 @@
 
          
          
-         Payment payment = new Payment(paymentMethod, cardNumber, cvv, cardName, expiryDate, datePaid);
+         Payment payment = new Payment(cardName,cardNumber, cvv, expiryDate, datePaid, paymentMethod);
          Payment pay = (Payment) session.getAttribute("payment");
          String updated = request.getParameter("updated");
          session.setAttribute("payment", payment);
@@ -37,24 +37,23 @@
          
          %>
        
-         <h1>Saved Payment Card  </h1>
-         
-         <p>Congratulations <span><%=(updated != null) ? "Update was successful":"" %> </span></p>
+         <h1>Confirm Payment Details <span><%=(updated != null) ? "Update was successful":"" %></span> </h1>
         
         <div class="container" >
-            <form action="updatePayment.jsp" method="post" >
+            <form action="paymentSucess.jsp" method="post" >
                 <table  id="paymentInfo_table" >
                     
                 <tr><td>Name:</td><td>${payment.cardName}</td></tr><br>
                 <tr><td>Card number:</td><td>${payment.cardNumber}</td></tr><br>
                 <tr><td>Expiry date:</td><td>${payment.expiryDate}</td></tr><br>
                 <tr><td>Security code:</td><td>${payment.cvv}</td></tr><br>
+                <tr><td>Date Paid:</td><td>${payment.datePaid}</td></tr><br>
+                <tr><td>Payment Method:</td><td>${payment.paymentMethod}</td></tr><br>
+
                 </table>
                 <br>
-                <input type="submit" value="Update Details">
-                <input type="hidden" name="updated" value="updated">
-                  
-
+                <input type="submit" value="Confirm Payment">
+                
             </form>
                 <p><a class= "button" style="center" href="main.jsp">Home</a></p>
         </div>
