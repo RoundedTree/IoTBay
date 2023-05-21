@@ -30,13 +30,12 @@ public class LogsController extends HttpServlet {
 		HttpSession session = request.getSession();
 		DBManager manager = (DBManager) session.getAttribute("manager");
 		User user = (User) session.getAttribute("user");
-
+		// This is for controlling the date filter, note: If both dates are not set, an error occurs.
 		if (user != null) {
 			try {
 				String startDateParam = request.getParameter("startDate");
 				String endDateParam = request.getParameter("endDate");
 
-				// Use reasonable defaults if no dates are provided
 				Date startDate = startDateParam != null ? Date.valueOf(startDateParam)
 						: Date.valueOf(LocalDate.now().minusYears(10));
 				Date endDate = endDateParam != null ? Date.valueOf(endDateParam)

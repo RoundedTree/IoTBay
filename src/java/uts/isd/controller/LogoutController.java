@@ -20,6 +20,7 @@ import uts.isd.model.dao.DBManager;
 
 public class LogoutController extends HttpServlet {
 	@Override
+	// This doGet logs the user activity when the user logs out, invalidates their session and returns them to index.
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();

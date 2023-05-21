@@ -20,8 +20,9 @@ import uts.isd.model.dao.DBManager;
  * @author Thomas
  */
 public class RegisterController extends HttpServlet {
-
 	@Override
+	// This creates a new user based on what the user types into the registration form.
+	// It's possible to enter anything into email because there's nothing to validate it.
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();

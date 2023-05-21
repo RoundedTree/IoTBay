@@ -28,7 +28,7 @@ public class UserController extends HttpServlet {
 		DBManager manager = (DBManager) session.getAttribute("manager");
 
 		String action = request.getParameter("action");
-
+		// loadAdmin makes sure that it initializes the list of users.
 		if ("loadAdmin".equals(action)) {
 			try {
 				List<User> users = manager.getAllUsers();
@@ -37,6 +37,8 @@ public class UserController extends HttpServlet {
 			} catch (SQLException e) {
 				throw new ServletException("Cannot get users", e);
 			}
+		// Search here gets the parameter in the search bar and inputs that into searchUsers, which filters out
+		// users with that name.
 		} else if ("search".equals(action)) {
 			String name = request.getParameter("name");
 			try {
@@ -53,7 +55,6 @@ public class UserController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
 		
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
@@ -67,7 +68,8 @@ public class UserController extends HttpServlet {
 		}
 
 		DBManager manager = (DBManager) session.getAttribute("manager");
-
+		
+		// The following lines all run the DBManager methods based on the action posted.
 		if (action.equals("delete")) {
 			try {
 				manager.deleteUser(id);
@@ -87,7 +89,8 @@ public class UserController extends HttpServlet {
 				ex.printStackTrace();
 			}
 		}
-
+		
+		// This ensures that the full list appears when the search function isn't being used.
 		try {
 			List<User> users = manager.getAllUsers();
 			session.setAttribute("users", users);

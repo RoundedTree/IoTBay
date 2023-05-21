@@ -19,7 +19,7 @@ import uts.isd.model.dao.DBManager;
  * @author Thomas
  */
 public class CancelAccountController extends HttpServlet {
-
+	// This sets the user's account to cancelled status when it's called.
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		DBManager manager = (DBManager) session.getAttribute("manager");
